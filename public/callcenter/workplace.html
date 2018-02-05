@@ -16,7 +16,7 @@
 <div ng-show="UI.warning.browser" class="panel panel-default ui-warning" ng-cloak>{{UI.warning.browser}}</div>
 <div ng-show="UI.warning.worker" class="panel panel-default ui-warning" ng-cloak>{{UI.warning.worker}}</div>
 
-<div class="container" style="width:860px">
+<div class="container" style="width:100%">
 
   <section class="workflow-controller" ng-cloak>
 
@@ -138,43 +138,42 @@
 
       </div>
       <!-- agent is working on a task -->
-      <section ng-controller="PhoneController" ng-cloak class="phone-controller" >
-
-        <input style="font-size:2em; padding-left:10px;" ng-show="isActive == false" ng-model="phoneNumber" type="text" name="phoneNumber" placeholder="+.." />
-        <div class="phone-number" style="font-size:2em; padding-left:10px" ng-if="isActive == true" />{{phoneNumber}}</div>
-  
-        <div class="keypad">
-  
-          <div ng-click="addDigit('1')" class="digit">1</div>
-          <div ng-click="addDigit('2')" class="digit">2</div>
-          <div ng-click="addDigit('3')" class="digit">3</div>
-  
-          <div ng-click="addDigit('4')" class="digit">4</div>
-          <div ng-click="addDigit('5')" class="digit">5</div>
-          <div ng-click="addDigit('6')" class="digit">6</div>
-  
-          <div ng-click="addDigit('7')" class="digit">7</div>
-          <div ng-click="addDigit('8')" class="digit">8</div>
-          <div ng-click="addDigit('9')" class="digit">9</div>
-  
-          <div ng-click="addDigit('*')"class="digit">*</div>
-          <div ng-click="addDigit('0')" class="digit">0</div>
-          <div ng-click="addDigit('#')" class="digit">#</div>
-  
-        </div>
-  
-        <button class="button-call" ng-if="isActive == false" ng-click="call(phoneNumber)">CALL</button>
-        <button class="button-hangup" ng-if="isActive == true" ng-click="hangup()">HANGUP</button>
-        <span class="status">Status: {{status}}</span>
-        <span ng-if="error != null" class="status">Error: {{error}}</span>
-      </section>
     </div>
     </div>
 
    </div>
 
 </section>
+<section ng-controller="PhoneController" ng-cloak class="phone-controller" >
 
+  <input style="font-size:2em; padding-left:10px;" ng-show="isActive == false" ng-model="phoneNumber" type="text" name="phoneNumber" placeholder="+.." />
+  <div class="phone-number" style="font-size:2em; padding-left:10px" ng-if="isActive == true" />{{phoneNumber}}</div>
+
+  <div class="keypad">
+
+    <div ng-click="addDigit('1')" class="digit">1</div>
+    <div ng-click="addDigit('2')" class="digit">2</div>
+    <div ng-click="addDigit('3')" class="digit">3</div>
+
+    <div ng-click="addDigit('4')" class="digit">4</div>
+    <div ng-click="addDigit('5')" class="digit">5</div>
+    <div ng-click="addDigit('6')" class="digit">6</div>
+
+    <div ng-click="addDigit('7')" class="digit">7</div>
+    <div ng-click="addDigit('8')" class="digit">8</div>
+    <div ng-click="addDigit('9')" class="digit">9</div>
+
+    <div ng-click="addDigit('*')"class="digit">*</div>
+    <div ng-click="addDigit('0')" class="digit">0</div>
+    <div ng-click="addDigit('#')" class="digit">#</div>
+
+  </div>
+
+  <button class="button-call" ng-if="isActive == false" ng-click="call(phoneNumber)">CALL</button>
+  <button class="button-hangup" ng-if="isActive == true" ng-click="hangup()">HANGUP</button>
+  <span class="status">Status: {{status}}</span>
+  <span ng-if="error != null" class="status">Error: {{error}}</span>
+</section>
 </div>
 
   <script type="text/javascript" src="//media.twiliocdn.com/sdk/js/client/v1.4/twilio.min.js"></script>

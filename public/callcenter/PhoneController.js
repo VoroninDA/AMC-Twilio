@@ -56,6 +56,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
 		});
 
+		//Inject "Click to Dial" code here
 		Twilio.Device.incoming(function (conn) {
 			$scope.status = 'incoming connection from ' + conn.parameters.From;
 			$scope.isActive = true;
@@ -82,6 +83,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
 	};
 
+	//Utilize this when pressing "Dial"
 	$scope.call = function (phoneNumber) {
 		$scope.$broadcast('CallPhoneNumber', { phoneNumber: phoneNumber});
 	};

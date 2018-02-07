@@ -8,6 +8,20 @@
   <link rel="stylesheet" href="/styles/bootstrap.css" type="text/css" />
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
       type="text/css" rel="stylesheet" />
+  <!--PUT THE AMC Integratio code scripts here-->
+
+  <!--@{var apiLocation = "https://contactcanvascloudframework.azurewebsites.net/Scripts/bundles/AMCChannelPluginAPI.js";}
+   
+    <script src="@apiLocation" type="text/javascript"></script>
+    <script src="~/AMCjs/AMCTracer.js"></script>
+    <script src="~/AMCjs/TwilioPlugin.js"></script>
+    <script src="~/AMCjs/LoginEvents.js"></script>
+    <script src="~/AMCjs/CallCounterMethods.js"></script>
+    <script src="~/AMCjs/CallbackMethods.js"></script>
+    <script src="~/AMCjs/StateMethods.js"></script>
+    <script src="~/AMCjs/LocalStorageHelpers.js"></script>
+    <script src="~/AMCjs/ButtonEvents.js"></script>
+    <script src="~/AMCjs/Helper.js"></script>-->
 
 </head>
 
@@ -24,8 +38,8 @@
 
       <div class="panel-body">
 
-        <div class="logout"><span ng-click="logout()">logout</span></div> 
-        <h3 class="name" class="page-header">{{worker.friendlyName}}&#39;s Call Agent Interface</h3>
+        <!--<div class="logout"><span ng-click="logout()">logout</span></div> 
+        <h3 class="name" class="page-header">{{worker.friendlyName}}&#39;s Call Agent Interface</h3>-->
 
         <div>Status:&nbsp;<span style="font-size:1em" ng-class="{'label-success': worker.activityName == 'Idle', 'label-danger': worker.activityName == 'Busy', 'label-default': worker.activityName == 'Offline', 'label-warning': worker.activityName == 'Reserved'}" class="label">{{worker.activityName}}</span></div>
 
@@ -144,7 +158,7 @@
    </div>
 
 </section>
-<section ng-controller="PhoneController" ng-cloak class="phone-controller" >
+<section ng-controller="PhoneController" ng-cloak class="phone-controller" style="display:none;">
 
   <input style="font-size:2em; padding-left:10px;" ng-show="isActive == false" ng-model="phoneNumber" type="text" name="phoneNumber" placeholder="+.." />
   <div class="phone-number" style="font-size:2em; padding-left:10px" ng-if="isActive == true" />{{phoneNumber}}</div>

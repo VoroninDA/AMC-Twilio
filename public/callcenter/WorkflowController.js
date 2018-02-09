@@ -224,6 +224,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 
 		}
 
+		//~!~!~!~!~!~!~!~!~!~! PHONE CALL HAPPENS HERE
 		if (reservation.task.attributes.channel === 'phone' && reservation.task.attributes.type === 'inbound_call') {
 
 			$log.log('dequeue reservation with  callerId: ' + $scope.configuration.twilio.callerId);

@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),{height:300});
-
     var Config = {};
     var localStorage = window.localStorage;
     var inpHost = window.location.origin;
@@ -14,9 +12,14 @@ $(document).ready(function () {
     iconPath.pluginIconPath = inpHost + "/callcenter/AMC/img/twilio.png";
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
 
-
-
     //ContactCanvas.Channel.registerForLoginEvents(ContactCanvas.Commons.getSequenceID(), function);
     //ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function);
     //ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function);
+
+    ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
+        Config = data.response.data.config;
+    });
+
+    setHeightOfSoftphone();
+
 })

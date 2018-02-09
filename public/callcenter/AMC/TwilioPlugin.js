@@ -1,8 +1,6 @@
-
-//Pre-document ready, set softphone height.
-ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),{height:300});
-
 $(document).ready(function () {
+
+    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),{height:300});
 
     var Config = {};
     var localStorage = window.localStorage;
@@ -13,7 +11,7 @@ $(document).ready(function () {
 
 
     var iconPath = {};
-    iconPath.pluginIconPath = inpHost + "/img/twilio.png";
+    iconPath.pluginIconPath = inpHost + "/callcenter/AMC/img/twilio.png";
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
 
 

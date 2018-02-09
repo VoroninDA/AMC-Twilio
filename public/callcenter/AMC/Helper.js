@@ -2,7 +2,7 @@ function setHeightOfSoftphone()
 {
     var heightObj = getHeight();
     
-    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),heightObj);
+    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),heightObj, null);
 }
 
 var currentHeight = 0;

@@ -23,12 +23,13 @@ $(document).ready(function () {
 
 //for interaction state changes, please see the workflow and phone controller.
 
-    setHeightOfSoftphone();
-
-})
 workerJS.on('reservation.created',
                  function(res){
                         console.log('AMC LOG');
                         console.log(res);
                         console.log('AMC LOG');
                     }, false);
+                    
+    setHeightOfSoftphone();
+
+})

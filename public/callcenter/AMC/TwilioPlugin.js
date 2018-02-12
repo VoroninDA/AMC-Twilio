@@ -21,15 +21,17 @@ $(document).ready(function () {
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(),{ contactsList : []});
     });
 
-//for interaction state changes, please see the workflow and phone controller.
-
-workerJS.on('reservation.created',
+    if (AMCworkerJS != undefined && AMCworkerJS != null){
+    AMCworkerJS.on('reservation.created',
                  function(res){
                         console.log('AMC LOG');
                         console.log(res);
                         console.log('AMC LOG');
                     }, false);
-                    
+                }
+
+//for interaction state changes, please see the workflow and phone controller.
+
     setHeightOfSoftphone();
 
-})
+});

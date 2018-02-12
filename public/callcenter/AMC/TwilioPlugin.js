@@ -35,3 +35,9 @@ $(document).ready(function () {
     setHeightOfSoftphone();
 
 });
+
+window.addEventListener('newWorker', function (newWorker){
+
+    console.log(newWorker.worker);
+
+});

@@ -21,7 +21,7 @@ $(document).ready(function () {
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(),{ contactsList : []});
     });
 
-    if (AMCworkerJS != undefined && AMCworkerJS != null){
+    /*if (AMCworkerJS != undefined && AMCworkerJS != null){
     AMCworkerJS.on('reservation.created',
                  function(res){
                         console.log('AMC LOG');
@@ -29,7 +29,7 @@ $(document).ready(function () {
                         console.log('AMC LOG');
                     }, false);
                 }
-
+*/
 //for interaction state changes, please see the workflow and phone controller.
 
     setHeightOfSoftphone();

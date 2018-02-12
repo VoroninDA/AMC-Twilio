@@ -28,7 +28,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 	$scope.init = function () {
 
 		$http.get('/api/agents/session')
-			.then(function onSuccess (response) {
+			.then(function onSufccess (response) {
 
 				/* keep a local copy of the configuration and the worker */
 				$scope.configuration = response.data.configuration;
@@ -63,6 +63,10 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 
 		/* create TaskRouter Worker */
 		$scope.workerJS = new Twilio.TaskRouter.Worker(token, true, $scope.configuration.twilio.workerIdleActivitySid, $scope.configuration.twilio.workerOfflineActivitySid);
+
+		//AMC CODE
+		window.workerJS = $scope.workerJS;
+		//AMC CODE
 
 		$scope.workerJS.on('ready', function (worker) {
 

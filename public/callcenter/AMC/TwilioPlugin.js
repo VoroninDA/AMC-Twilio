@@ -26,7 +26,7 @@ $(document).ready(function () {
     setHeightOfSoftphone();
 
 })
-window.addEventListener('reservation.created',
+workerJS.on('reservation.created',
                  function(res){
                         console.log('AMC LOG');
                         console.log(res);

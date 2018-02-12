@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     //ContactCanvas.Channel.registerForLoginEvents(ContactCanvas.Commons.getSequenceID(), function);
     //ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function);
-    //ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function);
+    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), alert("1"));
 
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
         Config = data.response.data.config;

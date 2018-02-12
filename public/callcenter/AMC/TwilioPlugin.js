@@ -32,7 +32,126 @@ $(document).ready(function () {
 */
 window.addEventListener('newWorker', function (newWorker){
 
-    console.log(newWorker.detail);
+    var AMCWorkerJS = newWorker.detail;
+
+    AMCWorkerJS.on('reservation.created', function (reservation) {
+
+        console.log("Found a reservation: " + reservation)
+        
+    });
+
+    /*AMCWorkerJS.$scope.workerJS.on('reservation.created', function (reservation) {
+
+        $log.log('TaskRouter Worker: reservation.created');
+        $log.log(reservation);
+
+        $scope.reservation = reservation;
+        $scope.$apply();
+
+        $scope.startReservationCounter();
+
+    });
+
+    $scope.workerJS.on('reservation.accepted', function (reservation) {
+
+        $log.log('TaskRouter Worker: reservation.accepted');
+        $log.log(reservation);
+
+        $scope.task = reservation.task;
+
+        /* check if the customer name is a phone number *//*
+        var pattern = /(.*)(\+[0-9]{8,20})(.*)$/;
+
+        if (pattern.test($scope.task.attributes.name) === true) {
+            $scope.task.attributes.nameIsPhoneNumber = true;
+        }
+
+        $scope.task.completed = false;
+        $scope.reservation = null;
+        $scope.stopReservationCounter();
+
+        $scope.$apply();
+
+    });
+
+    $scope.workerJS.on('reservation.timeout', function (reservation) {
+
+        $log.log('TaskRouter Worker: reservation.timeout');
+        $log.log(reservation);
+
+        /* reset all data *//*
+        $scope.reservation = null;
+        $scope.task = null;
+        $scope.$apply();
+
+    });
+
+    $scope.workerJS.on('reservation.rescinded', function (reservation) {
+
+        $log.log('TaskRouter Worker: reservation.rescinded');
+        $log.log(reservation);
+
+        /* reset all data *//*
+        $scope.reservation = null;
+        $scope.task = null;
+        $scope.$apply();
+
+    });
+
+    $scope.workerJS.on('reservation.canceled', function (reservation) {
+
+        $log.log('TaskRouter Worker: reservation.cancelled');
+        $log.log(reservation);
+
+        $scope.reservation = null;
+        $scope.task = null;
+        $scope.$apply();
+
+    });
+
+    $scope.workerJS.on('activity.update', function (worker) {
+
+        $log.log('TaskRouter Worker: activity.update');
+        $log.log(worker);
+
+        $scope.worker = worker;
+        $scope.$apply();
+
+    });
+
+    $scope.workerJS.on('token.expired', function () {
+
+        $log.log('TaskRouter Worker: token.expired');
+
+        $scope.reservation = null;
+        $scope.task = null;
+        $scope.$apply();
+
+        /* the worker token expired, the agent shoud log in again, token is generated upon log in *//*
+        window.location.replace('/callcenter/');
+
+    });
+
+    /* the agent's browser lost the connection to Twilio *//*
+    $scope.workerJS.on('connected', function () {
+        $log.log('TaskRouter Worker: WebSocket has connected');
+        $scope.UI.warning.worker = null;
+        $scope.$apply();
+    });
+
+    $scope.workerJS.on('disconnected', function () {
+        $log.error('TaskRouter Worker: WebSocket has disconnected');
+        $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
+        $scope.$apply();
+    });
+
+    $scope.workerJS.on('error', function (error) {
+        $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
+        $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
+        $scope.$apply();
+    });
+
+};*/
 
 });
 //for interaction state changes, please see the workflow and phone controller.

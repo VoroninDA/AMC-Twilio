@@ -38,5 +38,5 @@ function getHeight()
     }
     */
     currentHeight = height;
-    return { "height" : height};
+    return { height : height};
 }

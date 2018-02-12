@@ -32,7 +32,7 @@ $(document).ready(function () {
 */
 window.addEventListener('newWorker', function (newWorker){
 
-    console.log(newWorker.worker);
+    console.log(newWorker.detail);
 
 });
 //for interaction state changes, please see the workflow and phone controller.

@@ -1,7 +1,5 @@
 var app = angular.module('callcenterApplication', ['ngMessages', 'glue.directives']);
 
-var AMCworkerJS = {};
-
 app.controller('WorkflowController', function ($scope, $rootScope, $http, $interval, $log, $window) {
 
 	/* misc configuration data, for instance callerId for outbound calls */
@@ -30,7 +28,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 	$scope.init = function () {
 
 		$http.get('/api/agents/session')
-			.then(function onSufccess (response) {
+			.then(function onSuccess (response) {
 
 				/* keep a local copy of the configuration and the worker */
 				$scope.configuration = response.data.configuration;
@@ -66,9 +64,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 		/* create TaskRouter Worker */
 		$scope.workerJS = new Twilio.TaskRouter.Worker(token, true, $scope.configuration.twilio.workerIdleActivitySid, $scope.configuration.twilio.workerOfflineActivitySid);
 
-		//AMC CODE
-		AMCworkerJS = $scope.workerJS;
-		//AMC CODE
+		window.AMCworkerJS = $scope.workerJS;
 
 		$scope.workerJS.on('ready', function (worker) {
 

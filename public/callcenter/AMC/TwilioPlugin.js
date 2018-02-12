@@ -37,7 +37,8 @@ window.addEventListener('newWorker', function (newWorker){
     AMCWorkerJS.on('reservation.created', function (reservation) {
 
         console.log("Found a reservation: " + reservation)
-        
+        //reservation.task.attributes
+        //reservation.task.attributes.caller THIS IS THE PHONE NUMBER
     });
 
     /*AMCWorkerJS.$scope.workerJS.on('reservation.created', function (reservation) {

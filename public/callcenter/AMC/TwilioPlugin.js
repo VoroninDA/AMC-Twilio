@@ -30,14 +30,13 @@ $(document).ready(function () {
                     }, false);
                 }
 */
-//for interaction state changes, please see the workflow and phone controller.
-
-    setHeightOfSoftphone();
-
-});
-
 window.addEventListener('newWorker', function (newWorker){
 
     console.log(newWorker.worker);
+
+});
+//for interaction state changes, please see the workflow and phone controller.
+
+    setHeightOfSoftphone();
 
 });

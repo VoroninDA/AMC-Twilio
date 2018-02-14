@@ -89,10 +89,10 @@
 
 						<form class="chat-message-form form-horizontal" name="chatMessageForm" ng-hide="session.expired" style="margin-top:5px">
 							<div class="form-group">
-								<div class="col-xs-8">
+								<div class="col-xs-12">
 									<input ng-model="message" ng-model-options="{ debounce: 250 }" ng-required="true" autocomplete="off" ng-focus="focused()" name="text" type="text" class="form-control" placeholder="say something">
 								</div>
-								<div class="col-xs-4">
+								<div style="display: none;">
 									<button ng-disabled="chatMessageForm.$invalid || chatMessageForm.$pristine" class="btn btn-primary" ng-click="send()">Send</button>
 								</div>
 							</div>

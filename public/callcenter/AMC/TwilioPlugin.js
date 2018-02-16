@@ -57,7 +57,7 @@ $(document).ready(function () {
             if (reservation.task.attributes.channel == "chat") {
 
                 var details = new ContactCanvas.Commons.RecordItem("", "", "");
-                var email = reservation.task.attributes.email;
+                var email = reservation.task.attributes.name;
                 myIntercationID = myIntercationID + 1;
                 details.setEmail("", "", email);
                 var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
@@ -74,7 +74,7 @@ $(document).ready(function () {
             if (reservation.task.attributes.channel == "video") {
 
                 var details = new ContactCanvas.Commons.RecordItem("", "", "");
-                var email = reservation.task.attributes.email;
+                var email = reservation.task.attributes.name;
                 myIntercationID = myIntercationID + 1;
                 details.setEmail("", "", email);
                 var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.

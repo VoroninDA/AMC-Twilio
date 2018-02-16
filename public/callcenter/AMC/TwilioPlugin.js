@@ -39,7 +39,34 @@ $(document).ready(function () {
         var myInteractionID = "3";
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
+            var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
+            var details = new ContactCanvasChannelAPI.RecordItem("", "", "");
+            var interactionType = '';
+            var interactionDirection = '';
+            if (reservation.task.attributes.channel == "phone") {
+                var phonenumber = reservation.task.attributes.caller;
+                details.setPhone("ANI", "", phoneNumber);
+                interactionType = ContactCanvasChannelAPI.ChannelTypes.Telephony;
+            }
+            else if (reservation.task.attributes.channel == "chat" || reservation.task.attributes.channel == "video") {
+                details = new ContactCanvasChannelAPI.RecordItem("", "Contact", "");
+                var emailAddress = reservation.task.attributes.name;
+                details.setEmail("Email", "", emailAddress);
+                interactionType = ContactCanvasChannelAPI.ChannelTypes.Chat;
+            }
 
+            interactionDirection = ContactCanvasChannelAPI.InteractionDirectionTypes.Inbound;
+
+            ContactCanvasChannelAPI.setInteraction({
+                interactionType: interactionType,
+                state: interactionState,
+                details: details,
+                interactionId: myInteractionID,
+                scenarioId: myInteractionID,
+                interactionDirection: interactionDirection
+            });
+            myInteractionID++;
+/*
             if (reservation.task.attributes.channel == "phone") {
 
                 var details = new ContactCanvas.Commons.RecordItem("", "", "");
@@ -98,7 +125,7 @@ $(document).ready(function () {
 
             AMCdisconnect();
         });
-
+*/
         /*AMCWorkerJS.$scope.workerJS.on('reservation.created', function (reservation) {
     
             $log.log('TaskRouter Worker: reservation.created');

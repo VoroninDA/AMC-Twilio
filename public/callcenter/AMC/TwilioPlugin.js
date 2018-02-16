@@ -1,3 +1,5 @@
+import { disconnect } from "cluster";
+
 $(document).ready(function () {
 
     var Config = {};
@@ -34,7 +36,7 @@ $(document).ready(function () {
     window.addEventListener('newWorker', function (newWorker) {
 
         var AMCWorkerJS = newWorker.detail;
-        var myInteractionID = 0;
+        var myInteractionID = "3";
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
 
@@ -42,7 +44,7 @@ $(document).ready(function () {
 
                 var details = new ContactCanvas.Commons.RecordItem("", "", "");
                 var phonenumber = reservation.task.attributes.caller;
-                var myInteractionID = 3;
+                myInteractionID = "3";
                 details.setPhone("", "", phonenumber);
                 var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
                 var state = ContactCanvas.Commons.interactionStates.Alerting;
@@ -58,7 +60,7 @@ $(document).ready(function () {
             if (reservation.task.attributes.channel == "chat") {
 
                 var email = reservation.task.attributes.name;
-                myInteractionID = 3;
+                myInteractionID = "3";
                 var details = new ContactCanvas.Commons.RecordItem("", "", "");
                 details.setEmail("Email", "", email);
                 var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
@@ -75,7 +77,7 @@ $(document).ready(function () {
             if (reservation.task.attributes.channel == "video") {
 
                 var email = reservation.task.attributes.name;
-                myInteractionID = 3;
+                myInteractionID = "3";
                 var details = new ContactCanvas.Commons.RecordItem("", "", "");
                 details.setEmail("Email", "", email);
                 var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
@@ -94,18 +96,7 @@ $(document).ready(function () {
             //reservation.task.attributes
             //reservation.task.attributes.caller THIS IS THE PHONE NUMBER
 
-            var details = new ContactCanvas.Commons.RecordItem("", "", "");
-            details.setPhone("", "", 6464023580);
-            var direction = ContactCanvas.Commons.InteractionDirectionTypes.Outbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-            var state = ContactCanvas.Commons.interactionStates.Disconnected;
-            ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-                state: state,
-                details: details,
-                interactionId: myIntercationID,
-                interactionDirection: direction,
-                scenarioId: "3"
-            }, function (msg) {
-            });
+            AMCdisconnect();
         });
 
         /*AMCWorkerJS.$scope.workerJS.on('reservation.created', function (reservation) {
@@ -227,3 +218,19 @@ $(document).ready(function () {
     setHeightOfSoftphone();
 
 });
+function AMCdisconnect(){
+
+    //var details = new ContactCanvas.Commons.RecordItem("", "", "");
+    //details.setPhone("", "", 6464023580);
+    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Outbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
+    var state = ContactCanvas.Commons.interactionStates.Disconnected;
+    ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
+        state: state,
+        details: null,
+        interactionId: "3",
+        interactionDirection: direction,
+        scenarioId: "3"
+    }, function (msg) {
+    });
+
+}

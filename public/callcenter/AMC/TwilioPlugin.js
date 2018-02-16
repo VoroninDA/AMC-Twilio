@@ -6,6 +6,8 @@ $(document).ready(function () {
     var localStorage = window.localStorage;
     var inpHost = window.location.origin;
     var myIntercationID = 0;
+    var myInteractionID = 0;
+    var scenarioId = 0;
 
     ContactCanvas.Channel.enableClickToDial(ContactCanvas.Commons.getSequenceID(), function () { console.log("Click to Dial Enabled"); });
     //ContactCanvas.Channel.registerClickToDialEvent(ContactCanvas.Commons.getSequenceID(), clickToDialCallback);
@@ -36,9 +38,10 @@ $(document).ready(function () {
     window.addEventListener('newWorker', function (newWorker) {
 
         var AMCWorkerJS = newWorker.detail;
-        var myInteractionID = "3";
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
+            myInteractionID = ContactCanvas.Commons.getSequenceID();
+            scenarioId = ContactCanvas.Commons.getSequenceID();
             var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
             var details = new ContactCanvasChannelAPI.RecordItem("", "", "");
             var interactionType = '';
@@ -55,7 +58,7 @@ $(document).ready(function () {
                 interactionType = ContactCanvasChannelAPI.ChannelTypes.Chat;
             }
 
-            interactionDirection = ContactCanvasChannelAPI.InteractionDirectionTypes.Inbound;
+            interactionDirection = ContactCanvasChannelAPI.InteractionDirectionTypes.Outbound;
 
             ContactCanvasChannelAPI.setInteraction({
                 interactionType: interactionType,
@@ -67,77 +70,7 @@ $(document).ready(function () {
             });
             myInteractionID++;
 /*
-            if (reservation.task.attributes.channel == "phone") {
-
-                var details = new ContactCanvas.Commons.RecordItem("", "", "");
-                var phonenumber = reservation.task.attributes.caller;
-                myInteractionID = "3";
-                details.setPhone("", "", phonenumber);
-                var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-                var state = ContactCanvas.Commons.interactionStates.Alerting;
-                ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-                    state: state,
-                    details: details,
-                    interactionId: myInteractionID,
-                    interactionDirection: direction,
-                    scenarioId: "3",
-                }, function (msg) {
-                });
-            }
-            if (reservation.task.attributes.channel == "chat") {
-
-                var email = reservation.task.attributes.name;
-                myInteractionID = "3";
-                var details = new ContactCanvas.Commons.RecordItem("", "", "");
-                details.setEmail("Email", "", email);
-                var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-                var state = ContactCanvas.Commons.interactionStates.Alerting;
-                ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-                    state: state,
-                    details: details,
-                    interactionId: myInteractionID,
-                    interactionDirection: direction,
-                    scenarioId: "3",
-                }, function (msg) {
-                });
-            }
-            if (reservation.task.attributes.channel == "video") {
-
-                var email = reservation.task.attributes.name;
-                myInteractionID = "3";
-                var details = new ContactCanvas.Commons.RecordItem("", "", "");
-                details.setEmail("Email", "", email);
-                var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-                var state = ContactCanvas.Commons.interactionStates.Alerting;
-                ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-                    state: state,
-                    details: details,
-                    interactionId: myInteractionID,
-                    interactionDirection: direction,
-                    scenarioId: "3",
-                }, function (msg) {
-                });
-            }
-
-            //alert(reservation.task.attributes.caller);
-            //reservation.task.attributes
-            //reservation.task.attributes.caller THIS IS THE PHONE NUMBER
-
-            AMCdisconnect();
-        });
-*/
-        /*AMCWorkerJS.$scope.workerJS.on('reservation.created', function (reservation) {
-    
-            $log.log('TaskRouter Worker: reservation.created');
-            $log.log(reservation);
-    
-            $scope.reservation = reservation;
-            $scope.$apply();
-    
-            $scope.startReservationCounter();
-    
-        });
-    
+           
         $scope.workerJS.on('reservation.accepted', function (reservation) {
     
             $log.log('TaskRouter Worker: reservation.accepted');
@@ -159,13 +92,13 @@ $(document).ready(function () {
         $scope.$apply();
 
     });
-
+*/
     $scope.workerJS.on('reservation.timeout', function (reservation) {
 
         $log.log('TaskRouter Worker: reservation.timeout');
         $log.log(reservation);
 
-        /* reset all data *//*
+        /* reset all data */
         $scope.reservation = null;
         $scope.task = null;
         $scope.$apply();
@@ -177,7 +110,7 @@ $(document).ready(function () {
         $log.log('TaskRouter Worker: reservation.rescinded');
         $log.log(reservation);
 
-        /* reset all data *//*
+        /* reset all data */
         $scope.reservation = null;
         $scope.task = null;
         $scope.$apply();
@@ -194,7 +127,7 @@ $(document).ready(function () {
         $scope.$apply();
 
     });
-
+/*
     $scope.workerJS.on('activity.update', function (worker) {
 
         $log.log('TaskRouter Worker: activity.update');

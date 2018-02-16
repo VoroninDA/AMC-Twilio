@@ -34,6 +34,7 @@ $(document).ready(function () {
     window.addEventListener('newWorker', function (newWorker) {
 
         var AMCWorkerJS = newWorker.detail;
+        var myInteractionID = 0;
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
 
@@ -41,50 +42,50 @@ $(document).ready(function () {
 
                 var details = new ContactCanvas.Commons.RecordItem("", "", "");
                 var phonenumber = reservation.task.attributes.caller;
-                myIntercationID = myIntercationID + 1;
+                var myInteractionID = 3;
                 details.setPhone("", "", phonenumber);
                 var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
                 var state = ContactCanvas.Commons.interactionStates.Alerting;
                 ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
                     state: state,
                     details: details,
-                    interactionId: myIntercationID,
+                    interactionId: myInteractionID,
                     interactionDirection: direction,
-                    scenarioId: "2",
+                    scenarioId: "3",
                 }, function (msg) {
                 });
             }
             if (reservation.task.attributes.channel == "chat") {
 
-                var details = new ContactCanvas.Commons.RecordItem("", "", "");
                 var email = reservation.task.attributes.name;
-                myIntercationID = myIntercationID + 1;
-                details.setEmail("", "", email);
+                myInteractionID = 3;
+                var details = new ContactCanvas.Commons.RecordItem("", "", "");
+                details.setEmail("Email", "", email);
                 var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
                 var state = ContactCanvas.Commons.interactionStates.Alerting;
                 ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
                     state: state,
                     details: details,
-                    interactionId: myIntercationID,
+                    interactionId: myInteractionID,
                     interactionDirection: direction,
-                    scenarioId: "2",
+                    scenarioId: "3",
                 }, function (msg) {
                 });
             }
             if (reservation.task.attributes.channel == "video") {
 
-                var details = new ContactCanvas.Commons.RecordItem("", "", "");
                 var email = reservation.task.attributes.name;
-                myIntercationID = myIntercationID + 1;
-                details.setEmail("", "", email);
+                myInteractionID = 3;
+                var details = new ContactCanvas.Commons.RecordItem("", "", "");
+                details.setEmail("Email", "", email);
                 var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
                 var state = ContactCanvas.Commons.interactionStates.Alerting;
                 ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
                     state: state,
                     details: details,
-                    interactionId: myIntercationID,
+                    interactionId: myInteractionID,
                     interactionDirection: direction,
-                    scenarioId: "2",
+                    scenarioId: "3",
                 }, function (msg) {
                 });
             }
@@ -102,7 +103,7 @@ $(document).ready(function () {
                 details: details,
                 interactionId: myIntercationID,
                 interactionDirection: direction,
-                scenarioId: "2"
+                scenarioId: "3"
             }, function (msg) {
             });
         });

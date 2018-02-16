@@ -190,7 +190,7 @@ $(document).ready(function () {
 
     setHeightOfSoftphone();
 
-});
+});/*
 function AMCdisconnect() {
 
     //var details = new ContactCanvas.Commons.RecordItem("", "", "");
@@ -206,4 +206,4 @@ function AMCdisconnect() {
     }, function (msg) {
     });
 
-}
+}*/

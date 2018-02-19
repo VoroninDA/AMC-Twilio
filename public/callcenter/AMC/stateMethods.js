@@ -1,7 +1,93 @@
 
 // #region state methods.
 
+function setAnAlertingInteraction(reservation) {
+    console.log("called setAnAlertingInteraction");
+    //var profile = getLocalStorageProfile();
 
+    var details = new ContactCanvas.Commons.RecordItem("", "", "");
+    
+    var interactionType = '';
+    var interactionDirection = ContactCanvas.Commons.InteractionDirectionTypes.Inbound;
+    if (reservation.task.attributes.channel == "phone"){
+        var phoneNumber = reservation.task.attributes.caller;
+
+
+    }
+    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
+    var state = ContactCanvas.Commons.interactionStates.Alerting;
+    ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
+        state: state,
+        details: details,
+        interactionId: profile.inboundInteractionID,
+        interactionDirection: direction,
+        scenarioId: profile.inboundScenarioId,
+    }, function (msg) {
+    });
+}
+
+function setConnectedInboundState(phoneNumber)
+{
+    console.log("called setConnectedInboundState");
+    var profile = getLocalStorageProfile();
+    var details = new ContactCanvas.Commons.RecordItem("", "", "");
+
+    var cadDataInbound = getPhoneNumberCadData(phoneNumber);
+    if(cadDataInbound)
+    {
+        Object.keys(cadDataInbound).forEach(function(key) {
+           
+            var val = cadDataInbound[key];
+            details.setField(key,"","",val);
+        });
+    }
+    
+    details.setPhone("", "", phoneNumber);
+
+
+    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
+    var state = ContactCanvas.Commons.interactionStates.Connected;
+    ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
+        state: state,
+        details: details,
+        interactionId: profile.inboundInteractionID,
+        interactionDirection: direction,
+        scenarioId: profile.inboundScenarioId
+    }, function (msg) {
+    });
+}
+function setDisconnectedInboundState(phoneNumber)
+{
+    console.log("called setDisconnectedInboundState");
+
+    var profile = getLocalStorageProfile();
+    var details = new ContactCanvas.Commons.RecordItem("", "", "");
+
+    var cadDataInbound = getPhoneNumberCadData(phoneNumber);
+    if(cadDataInbound)
+    {
+        Object.keys(cadDataInbound).forEach(function(key) {
+           
+            var val = cadDataInbound[key];
+            details.setField(key,"","",val);
+        });
+    }
+    
+    details.setPhone("", "", phoneNumber);
+    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
+    var state = ContactCanvas.Commons.interactionStates.Disconnected;
+
+    ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
+        state: state,
+        details: details,
+        interactionId: profile.inboundInteractionID,
+        interactionDirection: direction,
+        scenarioId: profile.inboundScenarioId
+    }, function (msg) {
+    });
+
+}
+/*
 function processReadyStatus() {
     var profile = getLocalStorageProfile();
 
@@ -115,66 +201,6 @@ function afterDropCallProcessState() {
 
     }
 }
-
-function setAnAlertingInteraction(phoneNumber) {
-    console.log("called setAnAlertingInteraction");
-    var profile = getLocalStorageProfile();
-
-    var details = new ContactCanvas.Commons.RecordItem("", "", "");
-    var cadDataInbound = getPhoneNumberCadData(phoneNumber);
-    if(cadDataInbound)
-    {
-        Object.keys(cadDataInbound).forEach(function(key) {
-           
-            var val = cadDataInbound[key];
-            details.setField(key,"","",val);
-        });
-    }
-
-    details.setPhone("", "", phoneNumber);
-    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-    var state = ContactCanvas.Commons.interactionStates.Alerting;
-    ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-        state: state,
-        details: details,
-        interactionId: profile.inboundInteractionID,
-        interactionDirection: direction,
-        scenarioId: profile.inboundScenarioId,
-    }, function (msg) {
-    });
-}
-
-function setConnectedInboundState(phoneNumber)
-{
-    console.log("called setConnectedInboundState");
-    var profile = getLocalStorageProfile();
-    var details = new ContactCanvas.Commons.RecordItem("", "", "");
-
-    var cadDataInbound = getPhoneNumberCadData(phoneNumber);
-    if(cadDataInbound)
-    {
-        Object.keys(cadDataInbound).forEach(function(key) {
-           
-            var val = cadDataInbound[key];
-            details.setField(key,"","",val);
-        });
-    }
-    
-    details.setPhone("", "", phoneNumber);
-
-
-    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-    var state = ContactCanvas.Commons.interactionStates.Connected;
-    ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-        state: state,
-        details: details,
-        interactionId: profile.inboundInteractionID,
-        interactionDirection: direction,
-        scenarioId: profile.inboundScenarioId
-    }, function (msg) {
-    });
-}
-
 function setOnHoldInboundState(phoneNumber)
 {
     console.log("called setOnHoldInboundState");
@@ -205,39 +231,6 @@ function setOnHoldInboundState(phoneNumber)
     });
 
 }
-
-function setDisconnectedInboundState(phoneNumber)
-{
-    console.log("called setDisconnectedInboundState");
-
-    var profile = getLocalStorageProfile();
-    var details = new ContactCanvas.Commons.RecordItem("", "", "");
-
-    var cadDataInbound = getPhoneNumberCadData(phoneNumber);
-    if(cadDataInbound)
-    {
-        Object.keys(cadDataInbound).forEach(function(key) {
-           
-            var val = cadDataInbound[key];
-            details.setField(key,"","",val);
-        });
-    }
-    
-    details.setPhone("", "", phoneNumber);
-    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-    var state = ContactCanvas.Commons.interactionStates.Disconnected;
-
-    ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-        state: state,
-        details: details,
-        interactionId: profile.inboundInteractionID,
-        interactionDirection: direction,
-        scenarioId: profile.inboundScenarioId
-    }, function (msg) {
-    });
-
-}
-
 function setConnectedOutboundState(outPhoneNumber) {
     console.log("called setConnectedOutboundState");
 
@@ -434,5 +427,5 @@ function processPresence(res) {
         }
     }
 }
-
+*/
 // #endregion.

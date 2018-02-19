@@ -1,5 +1,3 @@
-import { disconnect } from "cluster";
-
 $(document).ready(function () {
 
     var Config = {};
@@ -39,81 +37,78 @@ $(document).ready(function () {
         var AMCWorkerJS = newWorker.detail;
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
+            var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
+            var details = new ContactCanvas.Commons.RecordItem("", "", "");
+            //var interactionType = '';
+            var interactionDirection = '';
+
+            //IS THIS A PHONE RESERVATION?
+            //YES, Phone
+            if (reservation.task.attributes.channel == "phone") {
+                var phoneNumber = reservation.task.attributes.caller;
+                details.setPhone("", "", phoneNumber);
+                //interactionType = ContactCanvasChannelAPI.ChannelTypes.Telephony;
+            }
+            //THIS IS CHAT
+            else if (reservation.task.attributes.channel == "chat" || reservation.task.attributes.channel == "video") {
+                var emailAddress = reservation.task.attributes.name;
+                details.setEmail("", "", emailAddress);
+                //interactionType = ContactCanvasChannelAPI.ChannelTypes.Chat;
+            }
+            //Not Handled Interaction
+            else {
+                console.log("This type of reservation " + reservation.task.attributes.channel + " was not handled as an interaction");
+                return;
+            }
+
             myInteractionID = ContactCanvas.Commons.getSequenceID();
             myScenarioId = ContactCanvas.Commons.getSequenceID();
-            var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
-            var details = new ContactCanvasChannelAPI.RecordItem("", "", "");
-            var interactionType = '';
-            var interactionDirection = '';
-            if (reservation.task.attributes.channel == "phone") {
-                var phonenumber = reservation.task.attributes.caller;
-                details.setPhone("ANI", "", phoneNumber);
-                interactionType = ContactCanvasChannelAPI.ChannelTypes.Telephony;
-            }
-            else if (reservation.task.attributes.channel == "chat" || reservation.task.attributes.channel == "video") {
-                details = new ContactCanvasChannelAPI.RecordItem("", "Contact", "");
-                var emailAddress = reservation.task.attributes.name;
-                details.setEmail("Email", "", emailAddress);
-                interactionType = ContactCanvasChannelAPI.ChannelTypes.Chat;
-            }
+            interactionDirection = ContactCanvas.Commons.InteractionDirectionTypes.Inbound;
 
-            interactionDirection = ContactCanvasChannelAPI.InteractionDirectionTypes.Outbound;
+            ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(),
+                {
+                    //interactionType: interactionType,
+                    state: interactionState,
+                    details: details,
+                    interactionId: myInteractionID,
+                    scenarioId: myScenarioId,
+                    interactionDirection: interactionDirection
+                }, function (msg) {
+                });
+        });
 
-            ContactCanvasChannelAPI.setInteraction({
-                interactionType: interactionType,
-                state: interactionState,
-                details: details,
-                interactionId: myInteractionID,
-                scenarioId: myScenarioId,
-                interactionDirection: interactionDirection
-            });
+        AMCWorkerJS.on('reservation.accepted', function (reservation){
+
+            var interactionState = ContactCanvas.Commons.interactionStates.Connected;
+            var interactionDirection = ContactCanvas.Commons.InteractionDirectionTypes.Inbound;
+            ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(),
+                {
+                    //interactionType: interactionType,
+                    state: interactionState,
+                    //details: details,
+                    interactionId: myInteractionID,
+                    scenarioId: myScenarioId,
+                    interactionDirection: interactionDirection
+                }, function (msg) {
+                });
+
         });
 
         AMCWorkerJS.on('reservation.timeout', function (reservation) {
 
-            var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-            var state = ContactCanvas.Commons.interactionStates.Disconnected;
-            ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-                state: state,
-                details: null,
-                interactionId: myInteractionID,
-                interactionDirection: direction,
-                scenarioId: myScenarioId
-            });
-            myInteractionID = 0;
-            myScenarioId = 0;
+            AMCdisconnect();
 
         });
 
         AMCWorkerJS.on('reservation.rescinded', function (reservation) {
 
-            var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-            var state = ContactCanvas.Commons.interactionStates.Disconnected;
-            ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-                state: state,
-                details: null,
-                interactionId: myInteractionID,
-                interactionDirection: direction,
-                scenarioId: myScenarioId
-            });
-            myInteractionID = 0;
-            myScenarioId = 0;
+            AMCdisconnect();
 
         });
 
         AMCWorkerJS.on('reservation.canceled', function (reservation) {
 
-            var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-            var state = ContactCanvas.Commons.interactionStates.Disconnected;
-            ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-                state: state,
-                details: null,
-                interactionId: myInteractionID,
-                interactionDirection: direction,
-                scenarioId: myScenarioId
-            });
-            myInteractionID = 0;
-            myScenarioId = 0;
+            AMCdisconnect();
 
         });
         /*
@@ -126,17 +121,17 @@ $(document).ready(function () {
                 $scope.task = reservation.task;
         
                 /* check if the customer name is a phone number *//*
-    var pattern = /(.*)(\+[0-9]{8,20})(.*)$/;
+var pattern = /(.*)(\+[0-9]{8,20})(.*)$/;
 
-    if (pattern.test($scope.task.attributes.name) === true) {
-        $scope.task.attributes.nameIsPhoneNumber = true;
-    }
+if (pattern.test($scope.task.attributes.name) === true) {
+$scope.task.attributes.nameIsPhoneNumber = true;
+}
 
-    $scope.task.completed = false;
-    $scope.reservation = null;
-    $scope.stopReservationCounter();
+$scope.task.completed = false;
+$scope.reservation = null;
+$scope.stopReservationCounter();
 
-    $scope.$apply();
+$scope.$apply();
 
 });
 */
@@ -160,50 +155,58 @@ $(document).ready(function () {
                 $scope.$apply();
         
                 /* the worker token expired, the agent shoud log in again, token is generated upon log in *//*
-        window.location.replace('/callcenter/');
+window.location.replace('/callcenter/');
 
-    });
+});
 
-    /* the agent's browser lost the connection to Twilio *//*
-            $scope.workerJS.on('connected', function () {
-                $log.log('TaskRouter Worker: WebSocket has connected');
-                $scope.UI.warning.worker = null;
-                $scope.$apply();
-            });
-        
-            $scope.workerJS.on('disconnected', function () {
-                $log.error('TaskRouter Worker: WebSocket has disconnected');
-                $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
-                $scope.$apply();
-            });
-        
-            $scope.workerJS.on('error', function (error) {
-                $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
-                $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
-                $scope.$apply();
-            });
-        
-        };*/
+/* the agent's browser lost the connection to Twilio *//*
+                $scope.workerJS.on('connected', function () {
+                    $log.log('TaskRouter Worker: WebSocket has connected');
+                    $scope.UI.warning.worker = null;
+                    $scope.$apply();
+                });
+            
+                $scope.workerJS.on('disconnected', function () {
+                    $log.error('TaskRouter Worker: WebSocket has disconnected');
+                    $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
+                    $scope.$apply();
+                });
+            
+                $scope.workerJS.on('error', function (error) {
+                    $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
+                    $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
+                    $scope.$apply();
+                });
+            
+            };*/
 
     });
     //for interaction state changes, please see the workflow and phone controller.
 
     setHeightOfSoftphone();
 
-});/*
+});
 function AMCdisconnect() {
 
-    //var details = new ContactCanvas.Commons.RecordItem("", "", "");
-    //details.setPhone("", "", 6464023580);
-    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Outbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
+    console.log("called setDisconnectedInboundState");
+
+    var details = new ContactCanvas.Commons.RecordItem("", "", "");
+    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
     var state = ContactCanvas.Commons.interactionStates.Disconnected;
+
     ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
         state: state,
-        details: null,
-        interactionId: "3",
+        details: details,
+        interactionId: myInteractionID,
         interactionDirection: direction,
-        scenarioId: "3"
+        scenarioId: myScenarioId
     }, function (msg) {
     });
+
+}/*
+function updateInteractionAndScenarioID (scenario, interaction){
+
+    myScenarioId = scenario;
+    myInteractionID = interaction;
 
 }*/

@@ -183,27 +183,27 @@ window.location.replace('/callcenter/');
     });
     //for interaction state changes, please see the workflow and phone controller.
 
-    setHeightOfSoftphone();
+    function AMCdisconnect() {
+
+        console.log("called setDisconnectedInboundState");
+    
+        var details = new ContactCanvas.Commons.RecordItem("", "", "");
+        var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
+        var state = ContactCanvas.Commons.interactionStates.Disconnected;
+    
+        ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
+            state: state,
+            details: details,
+            interactionId: myInteractionID,
+            interactionDirection: direction,
+            scenarioId: myScenarioId
+        }, function (msg) {
+        });
+    
+    }
 
 });
-function AMCdisconnect() {
-
-    console.log("called setDisconnectedInboundState");
-
-    var details = new ContactCanvas.Commons.RecordItem("", "", "");
-    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-    var state = ContactCanvas.Commons.interactionStates.Disconnected;
-
-    ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-        state: state,
-        details: details,
-        interactionId: myInteractionID,
-        interactionDirection: direction,
-        scenarioId: myScenarioId
-    }, function (msg) {
-    });
-
-}/*
+/*
 function updateInteractionAndScenarioID (scenario, interaction){
 
     myScenarioId = scenario;

@@ -1,6 +1,7 @@
 
 // #region state methods.
 
+/*
 function setAnAlertingInteraction(reservation) {
     console.log("called setAnAlertingInteraction");
     //var profile = getLocalStorageProfile();
@@ -86,7 +87,7 @@ function setDisconnectedInboundState(phoneNumber)
     }, function (msg) {
     });
 
-}
+}*/
 /*
 function processReadyStatus() {
     var profile = getLocalStorageProfile();

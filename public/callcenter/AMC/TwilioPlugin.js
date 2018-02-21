@@ -7,7 +7,7 @@ $(document).ready(function () {
     var myScenarioId = 0;
 
     ContactCanvas.Channel.enableClickToDial(ContactCanvas.Commons.getSequenceID(), function () { console.log("Click to Dial Enabled"); });
-    //ContactCanvas.Channel.registerClickToDialEvent(ContactCanvas.Commons.getSequenceID(), clickToDialCallback);
+    ContactCanvas.Channel.registerClickToDialEvent(ContactCanvas.Commons.getSequenceID(), clickToDialCallback);
 
 
     var iconPath = {};
@@ -22,6 +22,8 @@ $(document).ready(function () {
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
     });
+
+
 
     /*if (AMCworkerJS != undefined && AMCworkerJS != null){
     AMCworkerJS.on('reservation.created',
@@ -182,7 +184,14 @@ window.location.replace('/callcenter/');
         }, function (msg) {
         });
 
-    }/*
+    }
+    
+    function clickToDialCallback(event){
+
+        alert(event);
+
+    }
+    /*
     function setHeightOfSoftphone()
 {
     var heightObj = getHeight();

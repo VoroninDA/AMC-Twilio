@@ -21,6 +21,9 @@ $(document).ready(function () {
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
+        ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
+            presence: "Ready"
+        }, null);
     });
 
 

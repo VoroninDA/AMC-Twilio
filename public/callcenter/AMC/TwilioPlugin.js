@@ -200,13 +200,13 @@ window.location.replace('/callcenter/');
         }, function (msg) {
         });
     
-    }
+    }/*
     function setHeightOfSoftphone()
 {
     var heightObj = getHeight();
     
     ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),heightObj, null);
-}
+}*/
 
 /*function getHeight()
 {

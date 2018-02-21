@@ -32,6 +32,10 @@ $(document).ready(function () {
                     }, false);
                 }
 */
+    window.addEventListener('completedTask', function () {
+        AMCdisconnect();
+    });
+
     window.addEventListener('newWorker', function (newWorker) {
 
         var AMCWorkerJS = newWorker.detail;
@@ -78,7 +82,7 @@ $(document).ready(function () {
                 });
         });
 
-        AMCWorkerJS.on('reservation.accepted', function (reservation){
+        AMCWorkerJS.on('reservation.accepted', function (reservation) {
 
             var interactionState = ContactCanvas.Commons.interactionStates.Connected;
             var interactionDirection = ContactCanvas.Commons.InteractionDirectionTypes.Inbound;
@@ -112,30 +116,7 @@ $(document).ready(function () {
             AMCdisconnect();
 
         });
-        /*
-               
-            $scope.workerJS.on('reservation.accepted', function (reservation) {
-        
-                $log.log('TaskRouter Worker: reservation.accepted');
-                $log.log(reservation);
-        
-                $scope.task = reservation.task;
-        
-                /* check if the customer name is a phone number *//*
-var pattern = /(.*)(\+[0-9]{8,20})(.*)$/;
 
-if (pattern.test($scope.task.attributes.name) === true) {
-$scope.task.attributes.nameIsPhoneNumber = true;
-}
-
-$scope.task.completed = false;
-$scope.reservation = null;
-$scope.stopReservationCounter();
-
-$scope.$apply();
-
-});
-*/
         /*
             $scope.workerJS.on('activity.update', function (worker) {
         
@@ -161,25 +142,25 @@ window.location.replace('/callcenter/');
 });
 
 /* the agent's browser lost the connection to Twilio *//*
-                $scope.workerJS.on('connected', function () {
-                    $log.log('TaskRouter Worker: WebSocket has connected');
-                    $scope.UI.warning.worker = null;
-                    $scope.$apply();
-                });
-            
-                $scope.workerJS.on('disconnected', function () {
-                    $log.error('TaskRouter Worker: WebSocket has disconnected');
-                    $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
-                    $scope.$apply();
-                });
-            
-                $scope.workerJS.on('error', function (error) {
-                    $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
-                    $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
-                    $scope.$apply();
-                });
-            
-            };*/
+                        $scope.workerJS.on('connected', function () {
+                            $log.log('TaskRouter Worker: WebSocket has connected');
+                            $scope.UI.warning.worker = null;
+                            $scope.$apply();
+                        });
+                    
+                        $scope.workerJS.on('disconnected', function () {
+                            $log.error('TaskRouter Worker: WebSocket has disconnected');
+                            $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
+                            $scope.$apply();
+                        });
+                    
+                        $scope.workerJS.on('error', function (error) {
+                            $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
+                            $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
+                            $scope.$apply();
+                        });
+                    
+                    };*/
 
     });
     //for interaction state changes, please see the workflow and phone controller.
@@ -187,11 +168,11 @@ window.location.replace('/callcenter/');
     function AMCdisconnect() {
 
         console.log("called setDisconnectedInboundState");
-    
+
         var details = new ContactCanvas.Commons.RecordItem("", "", "");
         var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
         var state = ContactCanvas.Commons.interactionStates.Disconnected;
-    
+
         ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
             state: state,
             details: details,
@@ -200,7 +181,7 @@ window.location.replace('/callcenter/');
             scenarioId: myScenarioId
         }, function (msg) {
         });
-    
+
     }/*
     function setHeightOfSoftphone()
 {
@@ -209,39 +190,39 @@ window.location.replace('/callcenter/');
     ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),heightObj, null);
 }*/
 
-/*function getHeight()
-{
-    //var profile = getLocalStorageProfile();
-    height = 300;
-
-    /*if(profile.phoneNumber)
+    /*function getHeight()
     {
-        var phoneData = getPhoneNumberData(profile.phoneNumber);
-       
-        height += 130;
-        height +=  getCadHeight(phoneData);
-    }
-    if(profile.outPhoneNumber)
-    {
-        height+= 130;
-    }
-
-    if(profile.warmTransferCallID)
-    {
-        height+= 130;
-    }
-    if(profile.conferenceCallID && !profile.conferenceCallCompleted)
-    {
-        height+= 130;
-    }
-    else if(profile.conferenceCallID && profile.conferenceCallCompleted)
-    {
-        height += 210;
-    }
+        //var profile = getLocalStorageProfile();
+        height = 300;
     
-    currentHeight = height;
-    return { height : height};
-}*/
+        /*if(profile.phoneNumber)
+        {
+            var phoneData = getPhoneNumberData(profile.phoneNumber);
+           
+            height += 130;
+            height +=  getCadHeight(phoneData);
+        }
+        if(profile.outPhoneNumber)
+        {
+            height+= 130;
+        }
+    
+        if(profile.warmTransferCallID)
+        {
+            height+= 130;
+        }
+        if(profile.conferenceCallID && !profile.conferenceCallCompleted)
+        {
+            height+= 130;
+        }
+        else if(profile.conferenceCallID && profile.conferenceCallCompleted)
+        {
+            height += 210;
+        }
+        
+        currentHeight = height;
+        return { height : height};
+    }*/
 });
 /*
 function updateInteractionAndScenarioID (scenario, interaction){

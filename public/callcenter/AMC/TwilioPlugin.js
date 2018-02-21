@@ -51,8 +51,9 @@ $(document).ready(function () {
             }
             //THIS IS CHAT
             else if (reservation.task.attributes.channel == "chat" || reservation.task.attributes.channel == "video") {
+                details = new ContactCanvas.Commons.RecordItem("", "Contact", "");
                 var emailAddress = reservation.task.attributes.name;
-                details.setEmail("", "", emailAddress);
+                details.setEmail("Email", "", emailAddress);
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Chat;
             }
             //Not Handled Interaction

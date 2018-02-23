@@ -14,16 +14,17 @@ $(document).ready(function () {
     iconPath.pluginIconPath = inpHost + "/callcenter/AMC/img/twilio.png";
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
 
-    //ContactCanvas.Channel.registerForLoginEvents(ContactCanvas.Commons.getSequenceID(), function);
+    ContactCanvas.Channel.registerForLoginEvents(ContactCanvas.Commons.getSequenceID(), function(){
+        $("").show();
+        ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
+        presence: "Ready"
+    }, null);});
     //ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function);
     ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), null);
 
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
-        ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
-            presence: "Ready"
-        }, null);
     });
 
 

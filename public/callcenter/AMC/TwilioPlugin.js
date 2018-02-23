@@ -37,9 +37,6 @@ $(document).ready(function () {
                     }, false);
                 }
 */
-window.addEventListener(, function () {
-    debugger;
-});
     window.addEventListener('completedTask', function () {
         AMCdisconnect();
     });

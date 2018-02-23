@@ -84,6 +84,9 @@ $(document).ready(function () {
                     scenarioId: myScenarioId,
                     interactionDirection: interactionDirection
                 }, function (msg) {
+                    ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
+                        presence: "Not Ready"
+                    }, null);
                 });
         });
 
@@ -185,13 +188,16 @@ window.location.replace('/callcenter/');
             interactionDirection: direction,
             scenarioId: myScenarioId
         }, function (msg) {
+            ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
+                presence: "Ready"
+            }, null);
         });
 
     }
     
     function clickToDialCallback(event){
 
-        alert(event);
+        alert("Hello");
 
     }
     /*

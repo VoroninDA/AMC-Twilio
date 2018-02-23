@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/styles/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="/styles/default.css" type="text/css" />
   <script src="https://contactcanvascloudframework.azurewebsites.net/Scripts/bundles/AMCChannelPluginAPI.js" type="text/javascript"></script>
-  <script src="/callcenter/AMC/login.js" type="text/javascript"></script>
+  <!--<script src="/callcenter/AMC/login.js" type="text/javascript"></script>-->
 
 </head>
 
@@ -55,6 +55,11 @@
   <script src="/scripts/angular.min.js"></script>
   <script src="/scripts/angular-messages.min.js"></script>
   <script src="LoginController.js"></script>
-
+  <script>
+      ContactCanvas.Channel.registerForLoginEvents(ContactCanvas.Commons.getSequenceID(), function(){
+          document.getElementById("loginform").style.display = "block";
+          });
+        ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function(){});
+      </script>
   </body>
   </html>

@@ -37,6 +37,9 @@ $(document).ready(function () {
                     }, false);
                 }
 */
+window.addEventListener(, function () {
+    debugger;
+});
     window.addEventListener('completedTask', function () {
         AMCdisconnect();
     });
@@ -150,25 +153,25 @@ window.location.replace('/callcenter/');
 });
 
 /* the agent's browser lost the connection to Twilio *//*
-                        $scope.workerJS.on('connected', function () {
-                            $log.log('TaskRouter Worker: WebSocket has connected');
-                            $scope.UI.warning.worker = null;
-                            $scope.$apply();
-                        });
-                    
-                        $scope.workerJS.on('disconnected', function () {
-                            $log.error('TaskRouter Worker: WebSocket has disconnected');
-                            $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
-                            $scope.$apply();
-                        });
-                    
-                        $scope.workerJS.on('error', function (error) {
-                            $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
-                            $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
-                            $scope.$apply();
-                        });
-                    
-                    };*/
+                                $scope.workerJS.on('connected', function () {
+                                    $log.log('TaskRouter Worker: WebSocket has connected');
+                                    $scope.UI.warning.worker = null;
+                                    $scope.$apply();
+                                });
+                            
+                                $scope.workerJS.on('disconnected', function () {
+                                    $log.error('TaskRouter Worker: WebSocket has disconnected');
+                                    $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
+                                    $scope.$apply();
+                                });
+                            
+                                $scope.workerJS.on('error', function (error) {
+                                    $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
+                                    $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
+                                    $scope.$apply();
+                                });
+                            
+                            };*/
 
     });
     //for interaction state changes, please see the workflow and phone controller.
@@ -194,8 +197,8 @@ window.location.replace('/callcenter/');
         });
 
     }
-    
-    function clickToDialCallback(event){
+
+    function clickToDialCallback(event) {
 
         alert("Hello");
 

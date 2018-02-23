@@ -8,19 +8,17 @@ $(document).ready(function () {
 
     ContactCanvas.Channel.enableClickToDial(ContactCanvas.Commons.getSequenceID(), function () { console.log("Click to Dial Enabled"); });
     ContactCanvas.Channel.registerClickToDialEvent(ContactCanvas.Commons.getSequenceID(), clickToDialCallback);
-
-
+debugger;
     var iconPath = {};
     iconPath.pluginIconPath = inpHost + "/callcenter/AMC/img/twilio.png";
-    ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
 
     ContactCanvas.Channel.registerForLoginEvents(ContactCanvas.Commons.getSequenceID(), function(){
-        $("").show();
         ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
         presence: "Ready"
     }, null);});
     //ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function);
     ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), null);
+    ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
         debugger;
         Config = data.response.data.config;

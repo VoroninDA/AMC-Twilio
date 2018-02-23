@@ -1,11 +1,6 @@
 $(document).ready(function () {
-debugger;
     ContactCanvas.Channel.registerForLoginEvents(ContactCanvas.Commons.getSequenceID(), function(){
-        $("#loginform").show();
+        document.getElementById("loginform").style.display = "block";
     });
-    ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
-        debugger;
-        //Config = data.response.data.config;
-
-    });
+    ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function(){});
 });

@@ -21,8 +21,8 @@ $(document).ready(function () {
     }, null);});
     //ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function);
     ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), null);
-
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
+        debugger;
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
     });

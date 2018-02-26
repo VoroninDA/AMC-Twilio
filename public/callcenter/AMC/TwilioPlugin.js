@@ -16,7 +16,7 @@ $(document).ready(function () {
         presence: "Ready"
     }, null);});
     //ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function);
-    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), null);
+    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function(msg){alert(msg);});
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
         debugger;
@@ -35,6 +35,13 @@ $(document).ready(function () {
                     }, false);
                 }
 */
+    $('#DTMFButton').click(function(){
+
+        var data = {};     
+        data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
+        ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function(msg){});
+
+    });
     window.addEventListener('completedTask', function () {
         AMCdisconnect();
     });

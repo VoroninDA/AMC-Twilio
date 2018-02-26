@@ -5,10 +5,9 @@ $(document).ready(function () {
     var inpHost = window.location.origin;
     var myInteractionID = 0;
     var myScenarioId = 0;
-
+    debugger;
     ContactCanvas.Channel.enableClickToDial(ContactCanvas.Commons.getSequenceID(), function () { console.log("Click to Dial Enabled"); });
     ContactCanvas.Channel.registerClickToDialEvent(ContactCanvas.Commons.getSequenceID(), clickToDialCallback);
-debugger;
     var iconPath = {};
     iconPath.pluginIconPath = inpHost + "/callcenter/AMC/img/twilio.png";
 

@@ -61,7 +61,16 @@
             <td>
              <div class="title">{{reservation.task.attributes.title}} from <br /> {{reservation.task.attributes.name}}</div>
              <div class="timer" ng-class='{"invisible": !reservationCounter}'>created {{ reservationCounter | TaskWaitingTime }} ago</div>
-             <div class="accept-panel"><button ng-click="acceptReservation(reservation)">Accept</button></div>
+             <table>
+               <tr>
+                 <td>
+                <div class="accept-panel"><button ng-click="acceptReservation(reservation)">Accept</button></div>
+              </td>
+              <td>
+                <div class="accept-panel" id="DTMFButton"><button>DTMF</button></div>
+              </td>
+              </tr>
+            </table>
             </td>
           </tr>
           </table>

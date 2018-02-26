@@ -11,7 +11,7 @@ function LoginController ($scope, $http) {
 		$http.post('/api/agents/login', { worker: $scope.worker, endpoint: endpoint })
 
 			.then(function onSuccess (response) {
-				window.location.replace('/callcenter/workplace.html');
+				window.location.replace('/callcenter/workplace.html&integrationId=be60efcf-f094-2d4f-0f3e-c90a9b38708f&PluginId=be60efcf-f094-2d4f-0f3e-c90a9b38708f&hostUrl=contactcanvascloudframework.azurewebsites.net&PluginUrl=https://amc-twilio-demo.herokuapp.com/callcenter/workplace.html&PluginName=Twilio');
 			}, function onError (response) {
 
 				if (response.status === 404) {

@@ -5,7 +5,7 @@ $(document).ready(function () {
     var inpHost = window.location.origin;
     var myInteractionID = 0;
     var myScenarioId = 0;
-    debugger;
+    //debugger;
     ContactCanvas.Channel.enableClickToDial(ContactCanvas.Commons.getSequenceID(), function () { console.log("Click to Dial Enabled"); });
     ContactCanvas.Channel.registerClickToDialEvent(ContactCanvas.Commons.getSequenceID(), clickToDialCallback);
     var iconPath = {};
@@ -19,7 +19,7 @@ $(document).ready(function () {
     ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function(msg){alert(msg);});
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
-        debugger;
+        //debugger;
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
     });
@@ -201,9 +201,8 @@ window.location.replace('/callcenter/');
     }
 
     function clickToDialCallback(event) {
-
-        var clickToDialObject = event;
-        alert("Hello");
+        
+        alert(event.number);
 
     }
     /*

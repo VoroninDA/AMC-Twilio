@@ -48,7 +48,10 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 			}, function onError (response) {
 				/* session is not valid anymore */
 				if (response.status === 403) {
-					window.location.replace('/callcenter/');
+					var docUrl = '/callcenter/index.html?';
+					docUrl = docUrl + window.location.href.split('?')[1];
+					//debugger;
+					window.location.replace(docUrl);
 				} else {
 					$log.error(JSON.stringify(response));
 					$scope.UI.warning.worker = JSON.stringify(response);
@@ -164,7 +167,9 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 			$scope.$apply();
 
 			/* the worker token expired, the agent shoud log in again, token is generated upon log in */
-			window.location.replace('/callcenter/');
+			var docUrl = '/callcenter/index.html?';
+			docUrl = docUrl + window.location.href.split('?')[1];
+			window.location.replace(docUrl);
 
 		});
 
@@ -299,7 +304,9 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 
 		$http.post('/api/agents/logout')
 			.then(function onSuccess (response) {
-				window.location.replace('/callcenter/index.html');
+				var docUrl = '/callcenter/index.html?';
+				docUrl = docUrl + window.location.href.split('?')[1];
+				window.location.replace(docUrl);
 			}, function onError (response) {
 				$log.error(response);
 			});

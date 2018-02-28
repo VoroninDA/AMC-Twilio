@@ -13,7 +13,7 @@ function LoginController ($scope, $http) {
 			.then(function onSuccess (response) {
 				var docUrl = '/callcenter/workplace.html?';
 				docUrl = docUrl + window.location.href.split('?')[1];
-				debugger;
+				//debugger;
 				window.location.replace(docUrl);
 			}, function onError (response) {
 

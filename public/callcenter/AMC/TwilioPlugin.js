@@ -202,6 +202,7 @@ window.location.replace('/callcenter/');
 
     function clickToDialCallback(event) {
 
+        var clickToDialObject = event;
         alert("Hello");
 
     }

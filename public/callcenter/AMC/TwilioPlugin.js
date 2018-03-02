@@ -55,21 +55,6 @@ $(document).ready(function () {
     });
 
     window.addEventListener('newWorker', function (newWorker) {
-        
-        $('#DTMFButton').click(function(){
-            debugger;
-            var data = {};     
-            data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
-            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function(msg){});
-    
-        });
-        $('#HangUpButton').click(function(){
-    
-            debugger;
-            AMCdisconnect();
-            $('#hangupandDTMFcontainer').hide();
-    
-        });
 
         //Creater worker/agent object for event subscribtions
         var AMCWorkerJS = newWorker.detail;
@@ -208,6 +193,21 @@ $(document).ready(function () {
     }
 
     function clickToDialCallback(event) {
+
+        $('#DTMFButton').click(function(){
+            debugger;
+            var data = {};     
+            data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
+            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function(msg){});
+    
+        });
+        $('#HangUpButton').click(function(){
+    
+            debugger;
+            AMCdisconnect();
+            $('#hangupandDTMFcontainer').hide();
+    
+        });
         
         var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
         var details = new ContactCanvas.Commons.RecordItem("", "", "");

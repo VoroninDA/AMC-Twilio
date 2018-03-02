@@ -22,6 +22,7 @@ $(document).ready(function () {
         //debugger;
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
+        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),{height:500}, null);
     });
 
 
@@ -48,7 +49,12 @@ $(document).ready(function () {
 
     window.addEventListener('newWorker', function (newWorker) {
 
-        var AMCWorkerJS = newWorker.detail;
+        //Creater worker/agent object for event subscribtions
+        var AMCWorkerJS = newWorker.Worker;
+        //var TwilioInstance = newWorker.Twilio;
+
+        debugger;
+        angular.element(document.getElementById('PhoneController')).scope().call("+16464023580");
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
             var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
@@ -201,7 +207,7 @@ window.location.replace('/callcenter/');
     }
 
     function clickToDialCallback(event) {
-        
+
         alert(event.number);
 
     }

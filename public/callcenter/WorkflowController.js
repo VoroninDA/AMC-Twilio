@@ -67,10 +67,11 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 		/* create TaskRouter Worker */
 		$scope.workerJS = new Twilio.TaskRouter.Worker(token, true, $scope.configuration.twilio.workerIdleActivitySid, $scope.configuration.twilio.workerOfflineActivitySid);
 
+		//AMC CODE
 		console.log($scope.workerJS);
-		var newWorkerEvent = new CustomEvent('newWorker', { detail: $scope.workerJS });
+		var newWorkerEvent = new CustomEvent('newWorker', { Worker: $scope.workerJS, Twilio: null });
 		window.dispatchEvent(newWorkerEvent);
-
+		//END AMC CODE
 		$scope.workerJS.on('ready', function (worker) {
 
 			$log.log('TaskRouter Worker: ready');

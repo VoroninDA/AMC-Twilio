@@ -1,5 +1,6 @@
 $(document).ready(function () {
     ContactCanvas.Channel.registerForLoginEvents(ContactCanvas.Commons.getSequenceID(), function(){
+        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),{height:265}, null);
         document.getElementById("loginform").style.display = "block";
     });
     //ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), null);

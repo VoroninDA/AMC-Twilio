@@ -48,7 +48,7 @@ $(document).ready(function () {
     window.addEventListener('newWorker', function (newWorker) {
 
         //Creater worker/agent object for event subscribtions
-        var AMCWorkerJS = newWorker.Worker;
+        var AMCWorkerJS = newWorker.detail;
         //var TwilioInstance = newWorker.Twilio;
         debugger;
         var phoneController = phoneControllerScope;

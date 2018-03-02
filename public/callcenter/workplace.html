@@ -160,7 +160,7 @@
       </div>
 
     </section>
-    <section ng-controller="PhoneController" ng-cloak class="phone-controller">
+    <section ng-controller="PhoneController" ng-cloak class="phone-controller" id="hangupandDTMFcontainer" style="display:none;">
 
       <input style="display:none;font-size:2em; padding-left:10px;" ng-show="isActive == false" ng-model="phoneNumber" type="text"
         name="phoneNumber" placeholder="+.." />
@@ -187,7 +187,7 @@
       </div>
 
       <!--<button class="button-call" ng-if="isActive == false" ng-click="call(phoneNumber)">CALL</button>-->
-      <div class="container" id="hangupandDTMFcontainer" style="display:none;">
+      <div class="container">
         <div class="row">
           <button class="button-call" id="DTMFButton" ng-if="isActive == true">DTMF</button>
           <button class="button-hangup" ng-if="isActive == true" ng-click="hangup()">HANGUP</button>

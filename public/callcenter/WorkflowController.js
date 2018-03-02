@@ -69,7 +69,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 		debugger;
 		//AMC CODE
 		console.log($scope.workerJS);
-		var newWorkerEvent = new CustomEvent('newWorker', { Worker: $scope.workerJS, Twilio: null });
+		var newWorkerEvent = new CustomEvent('newWorker', { Worker: $scope.workerJS });
 		window.dispatchEvent(newWorkerEvent);
 		//END AMC CODE
 		$scope.workerJS.on('ready', function (worker) {

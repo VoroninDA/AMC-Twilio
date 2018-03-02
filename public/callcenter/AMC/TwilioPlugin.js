@@ -200,12 +200,12 @@ $(document).ready(function () {
     function clickToDialCallback(event) {
 
         //alert(event.number);
-        debugger;
-        phoneControllerOne.call(event.number);
-        debugger;
-        phoneControllerTwo.call(event.number);
-        debugger;
-        phoneControllerThree.call(event.number);
+        //debugger;
+        //phoneControllerOne.call(event.number);
+        //debugger;
+        //phoneControllerTwo.call(event.number);
+        //debugger;
+        //phoneControllerThree.call(event.number);
         debugger;
         phoneControllerScope.call(event.number);
 

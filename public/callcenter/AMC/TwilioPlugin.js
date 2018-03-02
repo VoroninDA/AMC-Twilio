@@ -5,7 +5,6 @@ $(document).ready(function () {
     var inpHost = window.location.origin;
     var myInteractionID = 0;
     var myScenarioId = 0;
-    //debugger;
     ContactCanvas.Channel.enableClickToDial(ContactCanvas.Commons.getSequenceID(), function () { console.log("Click to Dial Enabled"); });
     ContactCanvas.Channel.registerClickToDialEvent(ContactCanvas.Commons.getSequenceID(), clickToDialCallback);
     var iconPath = {};
@@ -19,7 +18,6 @@ $(document).ready(function () {
     ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function(msg){alert(msg);});
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
-        //debugger;
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
         ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),{height:500}, null);
@@ -52,9 +50,8 @@ $(document).ready(function () {
         //Creater worker/agent object for event subscribtions
         var AMCWorkerJS = newWorker.Worker;
         //var TwilioInstance = newWorker.Twilio;
-
         debugger;
-        var phoneController = angular.element(document.getElementById('PhoneController')).scope();//.call("+16464023580");
+        var phoneController = PhoneControllerScope;
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
             var interactionState = ContactCanvas.Commons.interactionStates.Alerting;

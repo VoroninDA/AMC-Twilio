@@ -1,9 +1,14 @@
+var PhoneControllerScope;
 app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout, $log) {
 	$scope.status = null;
 	$scope.isActive = false;
 	$scope.phoneNumber = '';
 
 	$scope.connection;
+
+	//AMC CODE
+	phoneControllerScope = $scope;
+	//END AMC CODE
 
 	$scope.$on('InitializePhone', function (event, data) {
 		$log.log('InitializePhone event received');

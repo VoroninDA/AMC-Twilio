@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var phoneController;
+    var phoneController = phoneControllerScope;
     var Config = {};
     var localStorage = window.localStorage;
     var inpHost = window.location.origin;
@@ -52,7 +52,7 @@ $(document).ready(function () {
         var AMCWorkerJS = newWorker.detail;
         //var TwilioInstance = newWorker.Twilio;
         debugger;
-        phoneController = phoneControllerScope;
+        var phoneController = phoneControllerScope;
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
             var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
@@ -196,7 +196,11 @@ $(document).ready(function () {
 
     function clickToDialCallback(event) {
 
-        phoneController
+        //alert(event.number);
+        debugger;
+        phoneController.call(event.number);
+        debugger;
+        phoneControllerScope.call(event.number)
 
     }
     /*

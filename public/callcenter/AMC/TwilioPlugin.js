@@ -54,7 +54,7 @@ $(document).ready(function () {
         //var TwilioInstance = newWorker.Twilio;
 
         debugger;
-        angular.element(document.getElementById('PhoneController')).scope().call("+16464023580");
+        var phoneController = angular.element(document.getElementById('PhoneController')).scope();//.call("+16464023580");
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
             var interactionState = ContactCanvas.Commons.interactionStates.Alerting;

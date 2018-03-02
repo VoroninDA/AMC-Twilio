@@ -40,6 +40,7 @@ $(document).ready(function () {
 
     window.addEventListener('phoneCall', function(){
 
+        debugger;
         $('#DTMFButton').click(function () {
             debugger;
             var data = {};
@@ -52,7 +53,7 @@ $(document).ready(function () {
             $('#hangupandDTMFcontainer').hide();
         });
 
-    })
+    });
 
     window.addEventListener('completedTask', function () {
         AMCdisconnect();

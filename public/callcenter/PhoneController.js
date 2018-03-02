@@ -87,7 +87,6 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
 	};
 
-	//Utilize this when pressing "Dial"
 	$scope.call = function (phoneNumber) {
 		debugger;
 		$scope.$broadcast('CallPhoneNumber', { phoneNumber: phoneNumber});

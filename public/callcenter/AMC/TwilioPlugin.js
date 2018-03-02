@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
-    var phoneController = phoneControllerScope;
+    var phoneControllerOne = phoneControllerScope;
+    var phoneControllerTwo = {};
+    var phoneControllerThree;
     var Config = {};
     var localStorage = window.localStorage;
     var inpHost = window.location.origin;
@@ -52,7 +54,8 @@ $(document).ready(function () {
         var AMCWorkerJS = newWorker.detail;
         //var TwilioInstance = newWorker.Twilio;
         debugger;
-        var phoneController = phoneControllerScope;
+        phoneControllerTwo = phoneControllerScope;
+        phoneControllerThree = phoneControllerScope;
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
             var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
@@ -198,9 +201,13 @@ $(document).ready(function () {
 
         //alert(event.number);
         debugger;
-        phoneController.call(event.number);
+        phoneControllerOne.call(event.number);
         debugger;
-        phoneControllerScope.call(event.number)
+        phoneControllerTwo.call(event.number);
+        debugger;
+        phoneControllerThree.call(event.number);
+        debugger;
+        phoneControllerScope.call(event.number);
 
     }
     /*

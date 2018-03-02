@@ -1,4 +1,4 @@
-var PhoneControllerScope;
+var phoneControllerScope;
 app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout, $log) {
 	$scope.status = null;
 	$scope.isActive = false;

@@ -187,7 +187,7 @@
       </div>
 
       <!--<button class="button-call" ng-if="isActive == false" ng-click="call(phoneNumber)">CALL</button>-->
-      <div class="container">
+      <div class="container" id="hangupandDTMFcontainer" style="display:none;">
         <div class="row">
           <button class="button-call" id="DTMFButton" ng-if="isActive == true">DTMF</button>
           <button class="button-hangup" ng-if="isActive == true" ng-click="hangup()">HANGUP</button>

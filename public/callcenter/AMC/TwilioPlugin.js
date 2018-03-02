@@ -67,6 +67,7 @@ $(document).ready(function () {
             if (reservation.task.attributes.channel == "phone") {
                 var phoneNumber = reservation.task.attributes.caller;
                 details.setPhone("", "", phoneNumber);
+                $('#hangupandDTMFcontainer').show();
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Telephony;
             }
             //THIS IS CHAT

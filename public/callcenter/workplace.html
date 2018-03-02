@@ -189,8 +189,10 @@
       <!--<button class="button-call" ng-if="isActive == false" ng-click="call(phoneNumber)">CALL</button>-->
       <div class="container">
         <div class="row">
+            <div class="col-sm">
           <button class="button-call" id="DTMFButton" ng-if="isActive == true">DTMF</button>
           <button class="button-hangup" id="HangUpButton" ng-if="isActive == true" ng-click="hangup()">HANGUP</button>
+            </div>
         </div>
       </div>
       <!-- <span class="status">Status: {{status}}</span> -->

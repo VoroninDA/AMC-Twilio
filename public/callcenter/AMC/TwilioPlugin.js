@@ -37,7 +37,7 @@ $(document).ready(function () {
                 }
 */
     $('#DTMFButton').click(function(){
-
+        debugger;
         var data = {};     
         data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
         ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function(msg){});
@@ -45,6 +45,7 @@ $(document).ready(function () {
     });
     $('#HangUpButton').click(function(){
 
+        debugger;
         AMCdisconnect();
         $('#hangupandDTMFcontainer').hide();
 

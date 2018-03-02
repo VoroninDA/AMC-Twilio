@@ -33,6 +33,8 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 			$scope.connection = conn;
 			$scope.status = 'successfully established call';
 			$scope.isActive = true;
+			var completedTask = new CustomEvent('phoneCall');
+			window.dispatchEvent(completedTask);
 
 			$timeout(function () {
 				$scope.$apply();
@@ -64,7 +66,9 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 		Twilio.Device.incoming(function (conn) {
 			$scope.status = 'incoming connection from ' + conn.parameters.From;
 			$scope.isActive = true;
-
+			var completedTask = new CustomEvent('phoneCall');
+			window.dispatchEvent(completedTask);
+			
 			conn.accept();
 
 			conn.disconnect(function (conn) {

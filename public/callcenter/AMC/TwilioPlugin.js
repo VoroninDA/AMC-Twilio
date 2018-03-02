@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     var phoneController = phoneControllerScope;
-    var workflowController =workflowControllerScope;
+    var workflowController = workflowControllerScope;
     var Config = {};
     var localStorage = window.localStorage;
     var inpHost = window.location.origin;
@@ -12,17 +12,18 @@ $(document).ready(function () {
     var iconPath = {};
     iconPath.pluginIconPath = inpHost + "/callcenter/AMC/img/twilio.png";
 
-    ContactCanvas.Channel.registerForLoginEvents(ContactCanvas.Commons.getSequenceID(), function(){
+    ContactCanvas.Channel.registerForLoginEvents(ContactCanvas.Commons.getSequenceID(), function () {
         ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
-        presence: "Ready"
-    }, null);});
-    ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function(){workflowController.logout();});
-    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function(msg){alert(msg);});
+            presence: "Ready"
+        }, null);
+    });
+    ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function () { workflowController.logout(); });
+    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function (msg) { alert(msg); });
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
-        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(),{height:500}, null);
+        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 500 }, null);
     });
 
 
@@ -36,20 +37,23 @@ $(document).ready(function () {
                     }, false);
                 }
 */
-    $('#DTMFButton').click(function(){
-        debugger;
-        var data = {};     
-        data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
-        ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function(msg){});
 
-    });
-    $('#HangUpButton').click(function(){
+    window.addEventListener('phoneCall', function(){
 
-        debugger;
-        AMCdisconnect();
-        $('#hangupandDTMFcontainer').hide();
+        $('#DTMFButton').click(function () {
+            debugger;
+            var data = {};
+            data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
+            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { });
+        });
+        $('#HangUpButton').click(function () {
+            debugger;
+            AMCdisconnect();
+            $('#hangupandDTMFcontainer').hide();
+        });
 
-    });
+    })
+
     window.addEventListener('completedTask', function () {
         AMCdisconnect();
     });
@@ -126,12 +130,12 @@ $(document).ready(function () {
 
         });
 
-        AMCWorkerJS.on('reservation.timeout', function (reservation) {AMCdisconnect();});
+        AMCWorkerJS.on('reservation.timeout', function (reservation) { AMCdisconnect(); });
 
-        AMCWorkerJS.on('reservation.rescinded', function (reservation) {AMCdisconnect();});
+        AMCWorkerJS.on('reservation.rescinded', function (reservation) { AMCdisconnect(); });
 
-        AMCWorkerJS.on('reservation.canceled', function (reservation) {AMCdisconnect();});
-        
+        AMCWorkerJS.on('reservation.canceled', function (reservation) { AMCdisconnect(); });
+
 
         /*
         $scope.workerJS.on('activity.update', function (worker) {
@@ -147,25 +151,25 @@ $(document).ready(function () {
             $scope.task = null;
             $scope.$apply();
             /* the worker token expired, the agent shoud log in again, token is generated upon log in *//*
-            window.location.replace('/callcenter/');
-        });
-        $scope.workerJS.on('connected', function () {
-            $log.log('TaskRouter Worker: WebSocket has connected');
-            $scope.UI.warning.worker = null;
-            $scope.$apply();
-        });
+        window.location.replace('/callcenter/');
+    });
+    $scope.workerJS.on('connected', function () {
+        $log.log('TaskRouter Worker: WebSocket has connected');
+        $scope.UI.warning.worker = null;
+        $scope.$apply();
+    });
 
-        $scope.workerJS.on('disconnected', function () {
-            $log.error('TaskRouter Worker: WebSocket has disconnected');
-            $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
-            $scope.$apply();
-        });
+    $scope.workerJS.on('disconnected', function () {
+        $log.error('TaskRouter Worker: WebSocket has disconnected');
+        $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
+        $scope.$apply();
+    });
 
-        $scope.workerJS.on('error', function (error) {
-            $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
-            $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
-            $scope.$apply();
-        });*/
+    $scope.workerJS.on('error', function (error) {
+        $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
+        $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
+        $scope.$apply();
+    });*/
 
     });
     //for interaction state changes, please see the workflow and phone controller.
@@ -193,7 +197,7 @@ $(document).ready(function () {
     }
 
     function clickToDialCallback(event) {
-        
+
         var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
         var details = new ContactCanvas.Commons.RecordItem("", "", "");
         var interactionDirection = '';
@@ -219,21 +223,6 @@ $(document).ready(function () {
             });
 
         phoneController.call(event.number);
-
-        $('#DTMFButton').click(function(){
-            debugger;
-            var data = {};     
-            data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
-            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function(msg){});
-    
-        });
-        $('#HangUpButton').click(function(){
-    
-            debugger;
-            AMCdisconnect();
-            $('#hangupandDTMFcontainer').hide();
-    
-        });
 
     }
     /*

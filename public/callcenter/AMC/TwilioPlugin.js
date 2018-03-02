@@ -118,23 +118,11 @@ $(document).ready(function () {
 
         });
 
-        AMCWorkerJS.on('reservation.timeout', function (reservation) {
+        AMCWorkerJS.on('reservation.timeout', function (reservation) {AMCdisconnect();});
 
-            AMCdisconnect();
+        AMCWorkerJS.on('reservation.rescinded', function (reservation) {AMCdisconnect();});
 
-        });
-
-        AMCWorkerJS.on('reservation.rescinded', function (reservation) {
-
-            AMCdisconnect();
-
-        });
-
-        AMCWorkerJS.on('reservation.canceled', function (reservation) {
-
-            AMCdisconnect();
-
-        });
+        AMCWorkerJS.on('reservation.canceled', function (reservation) {AMCdisconnect();});
         
 
         /*
@@ -243,10 +231,3 @@ $(document).ready(function () {
         return { height : height};
     }*/
 });
-/*
-function updateInteractionAndScenarioID (scenario, interaction){
-
-    myScenarioId = scenario;
-    myInteractionID = interaction;
-
-}*/

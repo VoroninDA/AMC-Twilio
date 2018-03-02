@@ -43,6 +43,12 @@ $(document).ready(function () {
         ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function(msg){});
 
     });
+    $('#HangUpButton').click(function(){
+
+        AMCdisconnect();
+        $('#hangupandDTMFcontainer').hide();
+
+    });
     window.addEventListener('completedTask', function () {
         AMCdisconnect();
     });
@@ -186,6 +192,30 @@ $(document).ready(function () {
     }
 
     function clickToDialCallback(event) {
+        
+        var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
+        var details = new ContactCanvas.Commons.RecordItem("", "", "");
+        var interactionDirection = '';
+        var phoneNumber = event.number;
+        details.setPhone("", "", phoneNumber);
+        $('#hangupandDTMFcontainer').show();
+        myInteractionID = ContactCanvas.Commons.getSequenceID();
+        myScenarioId = ContactCanvas.Commons.getSequenceID();
+        interactionDirection = ContactCanvas.Commons.InteractionDirectionTypes.Outbound;
+
+        ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(),
+            {
+                //interactionType: interactionType,
+                state: interactionState,
+                details: details,
+                interactionId: myInteractionID,
+                scenarioId: myScenarioId,
+                interactionDirection: interactionDirection
+            }, function (msg) {
+                ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
+                    presence: "Not Ready"
+                }, null);
+            });
 
         phoneController.call(event.number);
 

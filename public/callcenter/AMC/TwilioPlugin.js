@@ -51,7 +51,7 @@ $(document).ready(function () {
         var AMCWorkerJS = newWorker.Worker;
         //var TwilioInstance = newWorker.Twilio;
         debugger;
-        var phoneController = PhoneControllerScope;
+        var phoneController = phoneControllerScope;
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
             var interactionState = ContactCanvas.Commons.interactionStates.Alerting;

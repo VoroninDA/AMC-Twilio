@@ -50,11 +50,11 @@
                               <button ng-click="acceptReservation(reservation)">Accept</button>
                             </div>
                           </td>
-                          <td>
+                          <!-- <td>
                             <div class="accept-panel" id="DTMFButton">
                               <button>DTMF</button>
                             </div>
-                          </td>
+                          </td> -->
                         </tr>
                       </table>
                     </td>
@@ -162,11 +162,11 @@
     </section>
     <section ng-controller="PhoneController" ng-cloak class="phone-controller">
 
-      <input style="font-size:2em; padding-left:10px;" ng-show="isActive == false" ng-model="phoneNumber" type="text" name="phoneNumber"
+      <input style="display:none;font-size:2em; padding-left:10px;" ng-show="isActive == false" ng-model="phoneNumber" type="text" name="phoneNumber"
         placeholder="+.." />
-      <div class="phone-number" style="font-size:2em; padding-left:10px" ng-if="isActive == true">{{phoneNumber}}</div>
+      <div class="phone-number" style="display:none;font-size:2em; padding-left:10px" ng-if="isActive == true">{{phoneNumber}}</div>
 
-      <div class="keypad">
+      <div class="keypad" style="display:none;">
 
         <div ng-click="addDigit('1')" class="digit">1</div>
         <div ng-click="addDigit('2')" class="digit">2</div>
@@ -187,8 +187,9 @@
       </div>
 
       <!--<button class="button-call" ng-if="isActive == false" ng-click="call(phoneNumber)">CALL</button>-->
+      <button class="button-call" id="DTMFButton" ng-if="isActive == true" >DTMF</button>
       <button class="button-hangup" ng-if="isActive == true" ng-click="hangup()">HANGUP</button>
-      <span class="status">Status: {{status}}</span>
+      <!-- <span class="status">Status: {{status}}</span> -->
       <span ng-if="error != null" class="status">Error: {{error}}</span>
     </section>
   </div>

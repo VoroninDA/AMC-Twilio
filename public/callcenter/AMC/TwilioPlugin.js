@@ -1,8 +1,7 @@
 $(document).ready(function () {
 
-    var phoneControllerOne = phoneControllerScope;
-    var phoneControllerTwo = {};
-    var phoneControllerThree;
+    var phoneController = phoneControllerScope;
+    var workflowController =workflowControllerScope;
     var Config = {};
     var localStorage = window.localStorage;
     var inpHost = window.location.origin;
@@ -17,7 +16,7 @@ $(document).ready(function () {
         ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
         presence: "Ready"
     }, null);});
-    //ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function);
+    ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function(){workflowController.logout();});
     ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function(msg){alert(msg);});
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
@@ -199,15 +198,7 @@ $(document).ready(function () {
 
     function clickToDialCallback(event) {
 
-        //alert(event.number);
-        //debugger;
-        //phoneControllerOne.call(event.number);
-        //debugger;
-        //phoneControllerTwo.call(event.number);
-        //debugger;
-        //phoneControllerThree.call(event.number);
-        debugger;
-        phoneControllerScope.call(event.number);
+        phoneController.call(event.number);
 
     }
     /*

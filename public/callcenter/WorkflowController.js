@@ -1,5 +1,5 @@
 var app = angular.module('callcenterApplication', ['ngMessages', 'glue.directives']);
-
+var workflowControllerScope;
 app.controller('WorkflowController', function ($scope, $rootScope, $http, $interval, $log, $window) {
 
 	/* misc configuration data, for instance callerId for outbound calls */
@@ -24,6 +24,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 		$scope.UI.warning.browser = message;
 	}
 
+	workflowControllerScope = $scope;
 	/* request configuration data and tokens from the backend */
 	$scope.init = function () {
 

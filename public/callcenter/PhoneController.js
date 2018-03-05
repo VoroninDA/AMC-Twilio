@@ -109,7 +109,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 			var data = {};
 			data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
 			ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) {
-				phoneController.addDigit(msg.response.data.contextualItem.channels[0].Data);
+				$scope.addDigit(msg.response.data.contextualItem.channels[0].Data);
 			});
 		}};
 

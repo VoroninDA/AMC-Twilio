@@ -41,6 +41,8 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
 			$timeout(function () {
 				$scope.$apply();
+				var phoneCall = new CustomEvent('phoneCall');
+				window.dispatchEvent(phoneCall);
 			});
 
 		});
@@ -62,8 +64,6 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
 			$timeout(function () {
 				$scope.$apply();
-				var phoneCall = new CustomEvent('phoneCall');
-				window.dispatchEvent(phoneCall);
 			});
 
 		});

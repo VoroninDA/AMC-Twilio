@@ -45,7 +45,7 @@ $(document).ready(function () {
         $('#DTMFButton').unbind( "click" );
         $('#HangUpButton').unbind( "click" );
 
-        debugger;
+        //debugger;
         $('#DTMFButton').click(function () {
             //debugger;
             if (dtmfAlreadyClicked) {
@@ -64,7 +64,7 @@ $(document).ready(function () {
             }
         });
         $('#HangUpButton').click(function () {
-            debugger;
+            //debugger;
             phoneController.hangup();
             if (outBoundCall) {
                 outBoundCall = false;
@@ -74,7 +74,9 @@ $(document).ready(function () {
         });
     });
 
-    window.addEventListener
+    window.addEventListener('acceptReservationEvent', function(){
+        $('#hangupandDTMFcontainer').show();
+    });
 
     window.addEventListener('completedTask', function () {
         $('#hangupandDTMFcontainer').hide();
@@ -97,7 +99,6 @@ $(document).ready(function () {
             if (reservation.task.attributes.channel == "phone") {
                 var phoneNumber = reservation.task.attributes.caller;
                 details.setPhone("", "", phoneNumber);
-                $('#hangupandDTMFcontainer').show();
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Telephony;
             }
             //THIS IS CHAT
@@ -212,6 +213,7 @@ $scope.$apply();
                 presence: "Ready"
             }, null);
         });
+        $('#hangupandDTMFcontainer').hide();
 
     }
 

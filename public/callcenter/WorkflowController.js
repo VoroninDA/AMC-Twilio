@@ -67,7 +67,6 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 		/* create TaskRouter Worker */
 		$scope.workerJS = new Twilio.TaskRouter.Worker(token, true, $scope.configuration.twilio.workerIdleActivitySid, $scope.configuration.twilio.workerOfflineActivitySid);
 		//AMC CODE
-		console.log($scope.workerJS);
 		var newWorkerEvent = new CustomEvent('newWorker', { detail: $scope.workerJS });
 		//newWorkerEvent.detail = {Worker: $scope.workerJS};
 		window.dispatchEvent(newWorkerEvent);
@@ -104,7 +103,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 
 			if (pattern.test($scope.task.attributes.name) === true) {
 				$scope.task.attributes.nameIsPhoneNumber = true;
-				
+
 			}
 
 			$scope.task.completed = false;
@@ -237,7 +236,11 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 
 		//~!~!~!~!~!~!~!~!~!~! PHONE CALL HAPPENS HERE
 		if (reservation.task.attributes.channel === 'phone' && reservation.task.attributes.type === 'inbound_call') {
-
+			//AMC CODE
+			var newWorkerEvent = new CustomEvent('newWorker', { detail: $scope.workerJS });
+		//newWorkerEvent.detail = {Worker: $scope.workerJS};
+		window.dispatchEvent(newWorkerEvent);
+		//END AMC CODE
 			$log.log('dequeue reservation with  callerId: ' + $scope.configuration.twilio.callerId);
 			reservation.conference($scope.configuration.twilio.callerId, undefined, undefined, function (err, reservation){
 

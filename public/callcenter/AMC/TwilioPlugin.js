@@ -18,7 +18,7 @@ $(document).ready(function () {
         }, null);
     });
     ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function () { workflowController.logout(); });
-    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function (msg) { alert(msg); });
+    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function (msg) { alert("hello"); });
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
         Config = data.response.data.config;
@@ -41,10 +41,10 @@ $(document).ready(function () {
     window.addEventListener('phoneCall', function(){
 
         $('#DTMFButton').click(function () {
-            debugger;
+            //debugger;
             var data = {};
             data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
-            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { });
+            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { debugger; });
         });
         $('#HangUpButton').click(function () {
             debugger;

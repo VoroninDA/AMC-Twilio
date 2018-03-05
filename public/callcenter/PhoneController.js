@@ -37,7 +37,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
 			$timeout(function () {
 				$scope.$apply();
-				//$('#PhoneNumber').html(conn.message.phone);
+				$('#PhoneNumber').html(conn.message.phone);
 				$('#hangupandDTMFcontainer').show();
 				//debugger;
 				//var phoneCall = new CustomEvent('phoneCall');

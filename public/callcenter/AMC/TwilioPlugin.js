@@ -81,7 +81,11 @@ $(document).ready(function () {
 
     window.addEventListener('completedTask', function () {
         $('#hangupandDTMFcontainer').hide();
-        AMCdisconnect();
+        phoneController.hangup(AMCReservation);
+        if (outBoundCall) {
+            outBoundCall = false;
+            AMCdisconnect();
+        }
     });
 
     window.addEventListener('newWorker', function (newWorker) {

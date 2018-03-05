@@ -88,7 +88,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 	});
 
 	$scope.hangup = function (reservation) {
-		
+		debugger;
 		$timeout(function () {
 			Twilio.Device.disconnectAll();
 		});

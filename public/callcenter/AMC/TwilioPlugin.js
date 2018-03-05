@@ -42,8 +42,8 @@ $(document).ready(function () {
 
     window.addEventListener('phoneCall', function () {
 
-        $('#DTMFButton').unbind( "click" );
-        $('#HangUpButton').unbind( "click" );
+        $('#DTMFButton').unbind("click");
+        $('#HangUpButton').unbind("click");
 
         //debugger;
         $('#DTMFButton').click(function () {
@@ -74,7 +74,7 @@ $(document).ready(function () {
         });
     });
 
-    window.addEventListener('acceptReservationEvent', function(){
+    window.addEventListener('acceptReservationEvent', function () {
         $('#hangupandDTMFcontainer').show();
     });
 

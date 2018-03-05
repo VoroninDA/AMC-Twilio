@@ -237,10 +237,9 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 		//~!~!~!~!~!~!~!~!~!~! PHONE CALL HAPPENS HERE
 		if (reservation.task.attributes.channel === 'phone' && reservation.task.attributes.type === 'inbound_call') {
 			//AMC CODE
-			var newWorkerEvent = new CustomEvent('newWorker', { detail: $scope.workerJS });
-		//newWorkerEvent.detail = {Worker: $scope.workerJS};
-		window.dispatchEvent(newWorkerEvent);
-		//END AMC CODE
+			/*var acceptReservationEvent = new CustomEvent('acceptReservationEvent');
+			window.dispatchEvent(acceptReservationEvent);*/
+			//END AMC CODE
 			$log.log('dequeue reservation with  callerId: ' + $scope.configuration.twilio.callerId);
 			reservation.conference($scope.configuration.twilio.callerId, undefined, undefined, function (err, reservation){
 

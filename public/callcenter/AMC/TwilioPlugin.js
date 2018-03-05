@@ -44,7 +44,8 @@ $(document).ready(function () {
             //debugger;
             var data = {};
             data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
-            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { debugger; });
+            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg){
+                                                                                                    phoneController.addDigit(msg.response.data.contextualItem.channels[0].Data); });
         });
         $('#HangUpButton').click(function () {
             debugger;

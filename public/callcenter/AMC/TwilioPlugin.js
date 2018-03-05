@@ -2,6 +2,7 @@ var myInteractionID = 0;
 var myScenarioId = 0;
 var dtmfAlreadyClicked = false;
 var outBoundCall = false;
+var AMCReservation = {};
 $(document).ready(function () {
 
     var phoneController = phoneControllerScope;
@@ -65,12 +66,12 @@ $(document).ready(function () {
         });
         $('#HangUpButton').click(function () {
             //debugger;
-            phoneController.hangup();
+            $('#hangupandDTMFcontainer').hide();
+            phoneController.hangup(AMCReservation);
             if (outBoundCall) {
                 outBoundCall = false;
                 AMCdisconnect();
             }
-            $('#hangupandDTMFcontainer').hide();
         });
     });
 
@@ -96,6 +97,7 @@ $(document).ready(function () {
 
             //IS THIS A PHONE RESERVATION?
             //YES, Phone
+            AMCReservation = reservation;
             if (reservation.task.attributes.channel == "phone") {
                 var phoneNumber = reservation.task.attributes.caller;
                 details.setPhone("", "", phoneNumber);
@@ -147,14 +149,16 @@ $(document).ready(function () {
                     interactionDirection: interactionDirection
                 }, function (msg) {
                 });
-
+                if (reservation.task.attributes.channel == "phone"){
+                    $('#hangupandDTMFcontainer').show();
+                }
         });
 
-        AMCWorkerJS.on('reservation.timeout', function (reservation) { AMCdisconnect(); });
+        //AMCWorkerJS.on('reservation.timeout', function (reservation) { AMCdisconnect(); });
 
-        AMCWorkerJS.on('reservation.rescinded', function (reservation) { AMCdisconnect(); });
+        //AMCWorkerJS.on('reservation.rescinded', function (reservation) { AMCdisconnect(); });
 
-        AMCWorkerJS.on('reservation.canceled', function (reservation) { AMCdisconnect(); });
+        //AMCWorkerJS.on('reservation.canceled', function (reservation) { AMCdisconnect(); });
 
 
         /*

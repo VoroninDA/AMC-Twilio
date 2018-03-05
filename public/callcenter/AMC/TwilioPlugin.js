@@ -149,9 +149,6 @@ $(document).ready(function () {
                     interactionDirection: interactionDirection
                 }, function (msg) {
                 });
-                if (reservation.task.attributes.channel == "phone"){
-                    $('#hangupandDTMFcontainer').show();
-                }
         });
 
         //AMCWorkerJS.on('reservation.timeout', function (reservation) { AMCdisconnect(); });

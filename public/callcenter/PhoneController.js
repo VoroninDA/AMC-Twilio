@@ -4,6 +4,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 	$scope.isActive = false;
 	$scope.phoneNumber = '';
 
+	
 	$scope.connection;
 
 	//AMC CODE
@@ -88,6 +89,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
 	$scope.hangup = function (reservation) {
 		debugger;
+		$('#hangupandDTMFcontainer').hide();
 		$timeout(function () {
 			Twilio.Device.disconnectAll();
 		});

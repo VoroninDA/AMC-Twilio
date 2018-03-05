@@ -1,12 +1,13 @@
+var myInteractionID = 0;
+var myScenarioId = 0;
+var dtmfAlreadyClicked = false;
+var phoneController = phoneControllerScope;
+var workflowController = workflowControllerScope;
+var outBoundCall = false;
 $(document).ready(function () {
-
-    var phoneController = phoneControllerScope;
-    var workflowController = workflowControllerScope;
     var Config = {};
     var localStorage = window.localStorage;
     var inpHost = window.location.origin;
-    var myInteractionID = 0;
-    var myScenarioId = 0;
     ContactCanvas.Channel.enableClickToDial(ContactCanvas.Commons.getSequenceID(), function () { console.log("Click to Dial Enabled"); });
     ContactCanvas.Channel.registerClickToDialEvent(ContactCanvas.Commons.getSequenceID(), clickToDialCallback);
     var iconPath = {};
@@ -38,22 +39,36 @@ $(document).ready(function () {
                 }
 */
 
-    window.addEventListener('phoneCall', function(){
+    window.addEventListener('phoneCall', function () {
 
         $('#DTMFButton').click(function () {
             //debugger;
-            var data = {};
-            data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
-            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg){
-                                                                                                    phoneController.addDigit(msg.response.data.contextualItem.channels[0].Data); });
+            if (dtmfAlreadyClicked) {
+                var data = {};
+                data.operationType = ContactCanvas.Commons.ContextualOperationType.Cancel;
+                ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { });
+                dtmfAlreadyClicked = false;
+            }
+            else {
+                dtmfAlreadyClicked = true;
+                var data = {};
+                data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
+                ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) {
+                    phoneController.addDigit(msg.response.data.contextualItem.channels[0].Data);
+                });
+            }
         });
         $('#HangUpButton').click(function () {
             phoneController.hangup();
-            //AMCdisconnect();
+            if(outBoundCall){
+                outBoundCall = false;
+                AMCdisconnect();
+            }
             $('#hangupandDTMFcontainer').hide();
         });
-
     });
+
+    window.addEventListener
 
     window.addEventListener('completedTask', function () {
         $('#hangupandDTMFcontainer').hide();
@@ -149,25 +164,25 @@ $(document).ready(function () {
             $scope.task = null;
             $scope.$apply();
             /* the worker token expired, the agent shoud log in again, token is generated upon log in *//*
-        window.location.replace('/callcenter/');
-    });
-    $scope.workerJS.on('connected', function () {
-        $log.log('TaskRouter Worker: WebSocket has connected');
-        $scope.UI.warning.worker = null;
-        $scope.$apply();
-    });
+    window.location.replace('/callcenter/');
+});
+$scope.workerJS.on('connected', function () {
+    $log.log('TaskRouter Worker: WebSocket has connected');
+    $scope.UI.warning.worker = null;
+    $scope.$apply();
+});
 
-    $scope.workerJS.on('disconnected', function () {
-        $log.error('TaskRouter Worker: WebSocket has disconnected');
-        $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
-        $scope.$apply();
-    });
+$scope.workerJS.on('disconnected', function () {
+    $log.error('TaskRouter Worker: WebSocket has disconnected');
+    $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
+    $scope.$apply();
+});
 
-    $scope.workerJS.on('error', function (error) {
-        $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
-        $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
-        $scope.$apply();
-    });*/
+$scope.workerJS.on('error', function (error) {
+    $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
+    $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
+    $scope.$apply();
+});*/
 
     });
     //for interaction state changes, please see the workflow and phone controller.
@@ -195,7 +210,7 @@ $(document).ready(function () {
     }
 
     function clickToDialCallback(event) {
-
+        outBoundCall = true;
         var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
         var details = new ContactCanvas.Commons.RecordItem("", "", "");
         var interactionDirection = '';

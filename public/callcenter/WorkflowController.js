@@ -104,6 +104,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 
 			if (pattern.test($scope.task.attributes.name) === true) {
 				$scope.task.attributes.nameIsPhoneNumber = true;
+				
 			}
 
 			$scope.task.completed = false;

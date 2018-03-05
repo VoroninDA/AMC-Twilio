@@ -245,7 +245,10 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 					return;
 				}
 			});
+			debugger;
 			$('#hangupandDTMFcontainer').show();
+			var phoneCall = new CustomEvent('phoneCall');
+			window.dispatchEvent(phoneCall);
 
 		}
 
@@ -286,12 +289,12 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 				$log.error(err);
 				return;
 			}
-
+		
+			var completedTask = new CustomEvent('completedTask');
+			window.dispatchEvent(completedTask);
 			$scope.reservation = null;
 			$scope.task = null;
 			$scope.$apply();
-			// var completedTask = new CustomEvent('completedTask');
-			// window.dispatchEvent(completedTask);
 
 		});
 

@@ -49,7 +49,7 @@ $(document).ready(function () {
         });
         $('#HangUpButton').click(function () {
             phoneController.hangup();
-            AMCdisconnect();
+            //AMCdisconnect();
             $('#hangupandDTMFcontainer').hide();
         });
 

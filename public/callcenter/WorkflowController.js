@@ -287,11 +287,11 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 				return;
 			}
 
-			var completedTask = new CustomEvent('completedTask');
-			window.dispatchEvent(completedTask);
 			$scope.reservation = null;
 			$scope.task = null;
 			$scope.$apply();
+			var completedTask = new CustomEvent('completedTask');
+			window.dispatchEvent(completedTask);
 
 		});
 

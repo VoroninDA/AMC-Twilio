@@ -93,7 +93,7 @@ $(document).ready(function () {
             var details = new ContactCanvas.Commons.RecordItem("", "", "");
             //var interactionType = '';
             var interactionDirection = '';
-
+            $('#mainContainer').show();
             //IS THIS A PHONE RESERVATION?
             //YES, Phone
             if (reservation.task.attributes.channel == "phone") {
@@ -196,8 +196,8 @@ $scope.$apply();
 
     function AMCdisconnect() {
 
-        console.log("called setDisconnectedInboundState");
-
+        //console.log("called setDisconnectedInboundState");
+        $('#mainContainer').hide();
         var details = new ContactCanvas.Commons.RecordItem("", "", "");
         var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
         var state = ContactCanvas.Commons.interactionStates.Disconnected;
@@ -225,6 +225,7 @@ $scope.$apply();
 
     function clickToDialCallback(event) {
         outBoundCall = true;
+        $('#mainContainer').show();
         var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
         var details = new ContactCanvas.Commons.RecordItem("", "", "");
         var interactionDirection = '';

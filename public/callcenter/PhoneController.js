@@ -13,7 +13,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 	$scope.$on('InitializePhone', function (event, data) {
 		$log.log('InitializePhone event received');
 
-		Twilio.Device.setup(data.token, {debug: true});
+		Twilio.Device.setup(data.token, { debug: true });
 
 		Twilio.Device.ready(function (device) {
 			$scope.status = 'Ready';
@@ -36,8 +36,9 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
 			$timeout(function () {
 				$scope.$apply();
-				var phoneCall = new CustomEvent('phoneCall');
-				window.dispatchEvent(phoneCall);
+				debugger;
+				//var phoneCall = new CustomEvent('phoneCall');
+				//window.dispatchEvent(phoneCall);
 			});
 
 		});
@@ -66,11 +67,11 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 		Twilio.Device.incoming(function (conn) {
 			$scope.status = 'incoming connection from ' + conn.parameters.From;
 			$scope.isActive = true;
-
+			debugger;
 			/*AMC CODE HERE*/
-			$scope.$apply();
-			var phoneCall = new CustomEvent('phoneCall');
-			window.dispatchEvent(phoneCall);
+			//$scope.$apply();
+			//var phoneCall = new CustomEvent('phoneCall');
+			//window.dispatchEvent(phoneCall);
 			//END AMC CODE
 			conn.accept();
 			conn.disconnect(function (conn) {
@@ -94,7 +95,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 	};
 
 	$scope.call = function (phoneNumber) {
-		$scope.$broadcast('CallPhoneNumber', { phoneNumber: phoneNumber});
+		$scope.$broadcast('CallPhoneNumber', { phoneNumber: phoneNumber });
 	};
 
 	$scope.addDigit = function (digit) {
@@ -111,7 +112,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 		$log.log('call: ' + data.phoneNumber);
 		$scope.phoneNumber = data.phoneNumber;
 
-		Twilio.Device.connect({'phone': data.phoneNumber});
+		Twilio.Device.connect({ 'phone': data.phoneNumber });
 
 		$scope.state = 'isActive';
 	});

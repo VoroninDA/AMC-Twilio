@@ -1,10 +1,11 @@
 var myInteractionID = 0;
 var myScenarioId = 0;
 var dtmfAlreadyClicked = false;
-var phoneController = phoneControllerScope;
-var workflowController = workflowControllerScope;
 var outBoundCall = false;
 $(document).ready(function () {
+
+    var phoneController = phoneControllerScope;
+    var workflowController = workflowControllerScope;
     var Config = {};
     var localStorage = window.localStorage;
     var inpHost = window.location.origin;
@@ -60,7 +61,7 @@ $(document).ready(function () {
         });
         $('#HangUpButton').click(function () {
             phoneController.hangup();
-            if(outBoundCall){
+            if (outBoundCall) {
                 outBoundCall = false;
                 AMCdisconnect();
             }
@@ -164,24 +165,24 @@ $(document).ready(function () {
             $scope.task = null;
             $scope.$apply();
             /* the worker token expired, the agent shoud log in again, token is generated upon log in *//*
-    window.location.replace('/callcenter/');
+window.location.replace('/callcenter/');
 });
 $scope.workerJS.on('connected', function () {
-    $log.log('TaskRouter Worker: WebSocket has connected');
-    $scope.UI.warning.worker = null;
-    $scope.$apply();
+$log.log('TaskRouter Worker: WebSocket has connected');
+$scope.UI.warning.worker = null;
+$scope.$apply();
 });
 
 $scope.workerJS.on('disconnected', function () {
-    $log.error('TaskRouter Worker: WebSocket has disconnected');
-    $scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
-    $scope.$apply();
+$log.error('TaskRouter Worker: WebSocket has disconnected');
+$scope.UI.warning.worker = 'TaskRouter Worker: WebSocket has disconnected';
+$scope.$apply();
 });
 
 $scope.workerJS.on('error', function (error) {
-    $log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
-    $scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
-    $scope.$apply();
+$log.error('TaskRouter Worker: an error occurred: ' + error.response + ' with message: ' + error.message);
+$scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
+$scope.$apply();
 });*/
 
     });

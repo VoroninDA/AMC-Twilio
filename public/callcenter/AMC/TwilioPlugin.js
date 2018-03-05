@@ -42,12 +42,13 @@ $(document).ready(function () {
 
     window.addEventListener('phoneCall', function () {
 
+        debugger;
         $('#DTMFButton').click(function () {
             //debugger;
             if (dtmfAlreadyClicked) {
-                var data = {};
-                data.operationType = ContactCanvas.Commons.ContextualOperationType.Cancel;
-                ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { });
+                //var data = {};
+                //data.operationType = ContactCanvas.Commons.ContextualOperationType.Cancel;
+                //ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { });
                 dtmfAlreadyClicked = false;
             }
             else {

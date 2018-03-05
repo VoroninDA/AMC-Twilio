@@ -2,7 +2,6 @@ var myInteractionID = 0;
 var myScenarioId = 0;
 var dtmfAlreadyClicked = false;
 var outBoundCall = false;
-var AMCReservation = {};
 $(document).ready(function () {
 
     var phoneController = phoneControllerScope;
@@ -41,9 +40,11 @@ $(document).ready(function () {
                 }
 */
 
-    /*window.addEventListener('phoneCall', function () {
+    window.addEventListener('phoneCall', function () {
+
         $('#DTMFButton').unbind("click");
         $('#HangUpButton').unbind("click");
+
         //debugger;
         $('#DTMFButton').click(function () {
             //debugger;
@@ -64,23 +65,21 @@ $(document).ready(function () {
         });
         $('#HangUpButton').click(function () {
             //debugger;
-            $('#hangupandDTMFcontainer').hide();
-            phoneController.hangup(AMCReservation);
+            phoneController.hangup();
             if (outBoundCall) {
                 outBoundCall = false;
                 AMCdisconnect();
             }
+            $('#hangupandDTMFcontainer').hide();
         });
+    });
 
-    });*/
-
-    /*window.addEventListener('acceptReservationEvent', function () {
+    window.addEventListener('acceptReservationEvent', function () {
         $('#hangupandDTMFcontainer').show();
-    });*/
+    });
 
     window.addEventListener('completedTask', function () {
         $('#hangupandDTMFcontainer').hide();
-        phoneController.hangup(AMCReservation);
         AMCdisconnect();
     });
 
@@ -90,7 +89,6 @@ $(document).ready(function () {
         var AMCWorkerJS = newWorker.detail;
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
-            $('#mainContainer').show();
             var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
             var details = new ContactCanvas.Commons.RecordItem("", "", "");
             //var interactionType = '';
@@ -98,11 +96,9 @@ $(document).ready(function () {
 
             //IS THIS A PHONE RESERVATION?
             //YES, Phone
-            AMCReservation = reservation;
             if (reservation.task.attributes.channel == "phone") {
                 var phoneNumber = reservation.task.attributes.caller;
                 details.setPhone("", "", phoneNumber);
-                
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Telephony;
             }
             //THIS IS CHAT
@@ -139,7 +135,6 @@ $(document).ready(function () {
 
         AMCWorkerJS.on('reservation.accepted', function (reservation) {
 
-            debugger;
             var interactionState = ContactCanvas.Commons.interactionStates.Connected;
             var interactionDirection = ContactCanvas.Commons.InteractionDirectionTypes.Inbound;
             ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(),
@@ -152,13 +147,14 @@ $(document).ready(function () {
                     interactionDirection: interactionDirection
                 }, function (msg) {
                 });
+
         });
 
-        //AMCWorkerJS.on('reservation.timeout', function (reservation) { AMCdisconnect(); });
+        AMCWorkerJS.on('reservation.timeout', function (reservation) { AMCdisconnect(); });
 
-        //AMCWorkerJS.on('reservation.rescinded', function (reservation) { AMCdisconnect(); });
+        AMCWorkerJS.on('reservation.rescinded', function (reservation) { AMCdisconnect(); });
 
-        //AMCWorkerJS.on('reservation.canceled', function (reservation) { AMCdisconnect(); });
+        AMCWorkerJS.on('reservation.canceled', function (reservation) { AMCdisconnect(); });
 
 
         /*
@@ -201,7 +197,7 @@ $scope.$apply();
     function AMCdisconnect() {
 
         console.log("called setDisconnectedInboundState");
-        $('#mainContainer').hide();
+
         var details = new ContactCanvas.Commons.RecordItem("", "", "");
         var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
         var state = ContactCanvas.Commons.interactionStates.Disconnected;
@@ -229,7 +225,6 @@ $scope.$apply();
 
     function clickToDialCallback(event) {
         outBoundCall = true;
-        $('#mainContainer').show();
         var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
         var details = new ContactCanvas.Commons.RecordItem("", "", "");
         var interactionDirection = '';

@@ -244,7 +244,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 					$log.error(err);
 					return;
 				}
-
+				$('#hangupandDTMFcontainer').show();
 			});
 
 		}
@@ -290,8 +290,8 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 			$scope.reservation = null;
 			$scope.task = null;
 			$scope.$apply();
-			var completedTask = new CustomEvent('completedTask');
-			window.dispatchEvent(completedTask);
+			// var completedTask = new CustomEvent('completedTask');
+			// window.dispatchEvent(completedTask);
 
 		});
 

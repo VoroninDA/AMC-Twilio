@@ -74,9 +74,9 @@ $(document).ready(function () {
         });
     });
 
-    window.addEventListener('acceptReservationEvent', function () {
+    /*window.addEventListener('acceptReservationEvent', function () {
         $('#hangupandDTMFcontainer').show();
-    });
+    });*/
 
     window.addEventListener('completedTask', function () {
         $('#hangupandDTMFcontainer').hide();
@@ -213,6 +213,12 @@ $scope.$apply();
                 presence: "Ready"
             }, null);
         });
+        if (dtmfAlreadyClicked) {
+            var data = {};
+            data.operationType = ContactCanvas.Commons.ContextualOperationType.Cancel;
+            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { });
+            dtmfAlreadyClicked = false;
+        }
         $('#hangupandDTMFcontainer').hide();
 
     }

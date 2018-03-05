@@ -83,7 +83,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 			$scope.connection = conn;
 			$scope.phoneNumber = conn.parameters.From;
 			$timeout(function(){
-				debugger;
+				//debugger;
 				$scope.addDigit('2');}, 8000);
 		});
 

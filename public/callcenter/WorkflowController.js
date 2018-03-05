@@ -239,7 +239,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 			//AMC CODE
 			/*var acceptReservationEvent = new CustomEvent('acceptReservationEvent');
 			window.dispatchEvent(acceptReservationEvent);*/
-			$('#hangupandDTMFcontainer').show();
+			//$('#hangupandDTMFcontainer').show();
 			//END AMC CODE
 			$log.log('dequeue reservation with  callerId: ' + $scope.configuration.twilio.callerId);
 			reservation.conference($scope.configuration.twilio.callerId, undefined, undefined, function (err, reservation){

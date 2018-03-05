@@ -66,8 +66,10 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 		Twilio.Device.incoming(function (conn) {
 			$scope.status = 'incoming connection from ' + conn.parameters.From;
 			$scope.isActive = true;
-			$scope.$apply();
+
 			/*AMC CODE HERE*/
+			$scope.$apply();
+			debugger;
 			var phoneCall = new CustomEvent('phoneCall');
 			window.dispatchEvent(phoneCall);
 			//END AMC CODE

@@ -45,7 +45,7 @@
   <div ng-show="UI.warning.browser" class="panel panel-default ui-warning" ng-cloak>{{UI.warning.browser}}</div>
   <div ng-show="UI.warning.worker" class="panel panel-default ui-warning" ng-cloak>{{UI.warning.worker}}</div>
 
-  <div class="container" style="width:100%; margin-top:10px;">
+  <div class="container" id="mainContainer" style="width:100%; margin-top:10px; display:none">
 
     <section class="workflow-controller" ng-cloak>
 
@@ -225,7 +225,7 @@
             </div>
         </div>
       </div>
-      <!-- <span class="status">Status: {{status}}</span> -->
+      <span class="status">Status: {{status}}</span>
       <span ng-if="error != null" class="status">Error: {{error}}</span>
     </section>
   </div>

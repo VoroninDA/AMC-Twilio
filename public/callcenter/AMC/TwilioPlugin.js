@@ -48,7 +48,7 @@ $(document).ready(function () {
                                                                                                     phoneController.addDigit(msg.response.data.contextualItem.channels[0].Data); });
         });
         $('#HangUpButton').click(function () {
-            debugger;
+            phoneController.hangup();
             AMCdisconnect();
             $('#hangupandDTMFcontainer').hide();
         });

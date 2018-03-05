@@ -199,8 +199,6 @@ $scope.$apply();
         var interactionDirection = '';
         var phoneNumber = event.number;
         details.setPhone("", "", phoneNumber);
-        $('#PhoneNumber').html(phoneNumber);
-        $('#hangupandDTMFcontainer').show();
         myInteractionID = ContactCanvas.Commons.getSequenceID();
         myScenarioId = ContactCanvas.Commons.getSequenceID();
         interactionDirection = ContactCanvas.Commons.InteractionDirectionTypes.Outbound;
@@ -219,8 +217,9 @@ $scope.$apply();
                 }, null);
             });
 
-        phoneController.call(event.number);
-
+        phoneController.call(phoneNumber);
+        $('#PhoneNumber').html(phoneNumber);
+        $('#hangupandDTMFcontainer').show();
     }
     /*
     function setHeightOfSoftphone()

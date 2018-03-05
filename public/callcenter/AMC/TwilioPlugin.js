@@ -40,7 +40,7 @@ $(document).ready(function () {
                 }
 */
 
-    window.addEventListener('phoneCall', function () {
+    /*window.addEventListener('phoneCall', function () {
 
         $('#DTMFButton').unbind("click");
         $('#HangUpButton').unbind("click");
@@ -72,11 +72,7 @@ $(document).ready(function () {
             }
             $('#hangupandDTMFcontainer').hide();
         });
-    });
-
-    window.addEventListener('acceptReservationEvent', function () {
-        $('#hangupandDTMFcontainer').show();
-    });
+    });*/
 
     window.addEventListener('completedTask', function () {
         $('#hangupandDTMFcontainer').hide();
@@ -194,35 +190,6 @@ $scope.$apply();
     });
     //for interaction state changes, please see the workflow and phone controller.
 
-    function AMCdisconnect() {
-
-        //console.log("called setDisconnectedInboundState");
-        $('#mainContainer').hide();
-        var details = new ContactCanvas.Commons.RecordItem("", "", "");
-        var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
-        var state = ContactCanvas.Commons.interactionStates.Disconnected;
-
-        ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
-            state: state,
-            details: details,
-            interactionId: myInteractionID,
-            interactionDirection: direction,
-            scenarioId: myScenarioId
-        }, function (msg) {
-            ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
-                presence: "Ready"
-            }, null);
-        });
-        if (dtmfAlreadyClicked) {
-            var data = {};
-            data.operationType = ContactCanvas.Commons.ContextualOperationType.Cancel;
-            ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { });
-            dtmfAlreadyClicked = false;
-        }
-        $('#hangupandDTMFcontainer').hide();
-
-    }
-
     function clickToDialCallback(event) {
         outBoundCall = true;
         $('#mainContainer').show();
@@ -295,3 +262,32 @@ $scope.$apply();
         return { height : height};
     }*/
 });
+
+function AMCdisconnect() {
+
+    //console.log("called setDisconnectedInboundState");
+    $('#mainContainer').hide();
+    var details = new ContactCanvas.Commons.RecordItem("", "", "");
+    var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
+    var state = ContactCanvas.Commons.interactionStates.Disconnected;
+
+    ContactCanvas.Channel.setInteraction(ContactCanvas.Commons.getSequenceID(), {
+        state: state,
+        details: details,
+        interactionId: myInteractionID,
+        interactionDirection: direction,
+        scenarioId: myScenarioId
+    }, function (msg) {
+        ContactCanvas.Channel.setPresence(ContactCanvas.Commons.getSequenceID(), {
+            presence: "Ready"
+        }, null);
+    });
+    if (dtmfAlreadyClicked) {
+        var data = {};
+        data.operationType = ContactCanvas.Commons.ContextualOperationType.Cancel;
+        ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { });
+        dtmfAlreadyClicked = false;
+    }
+    $('#hangupandDTMFcontainer').hide();
+
+}

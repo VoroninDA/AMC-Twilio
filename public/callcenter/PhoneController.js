@@ -36,7 +36,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
 			$timeout(function () {
 				$scope.$apply();
-				debugger;
+				//debugger;
 				//var phoneCall = new CustomEvent('phoneCall');
 				//window.dispatchEvent(phoneCall);
 			});
@@ -67,7 +67,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 		Twilio.Device.incoming(function (conn) {
 			$scope.status = 'incoming connection from ' + conn.parameters.From;
 			$scope.isActive = true;
-			debugger;
+			//debugger;
 			/*AMC CODE HERE*/
 			//$scope.$apply();
 			//var phoneCall = new CustomEvent('phoneCall');
@@ -87,12 +87,31 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 	});
 
 	$scope.hangup = function (reservation) {
-
+		if (outBoundCall) {
+			outBoundCall = false;
+			AMCdisconnect();
+		}
+		$('#hangupandDTMFcontainer').hide();
 		$timeout(function () {
 			Twilio.Device.disconnectAll();
 		});
 
 	};
+	$scope.dtmf = function () {
+		if (dtmfAlreadyClicked) {
+			var data = {};
+			data.operationType = ContactCanvas.Commons.ContextualOperationType.Cancel;
+			ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) { });
+			dtmfAlreadyClicked = false;
+		}
+		else {
+			dtmfAlreadyClicked = true;
+			var data = {};
+			data.operationType = ContactCanvas.Commons.ContextualOperationType.DTMF;
+			ContactCanvas.Channel.contextualOperation(ContactCanvas.Commons.getSequenceID(), data, function (msg) {
+				phoneController.addDigit(msg.response.data.contextualItem.channels[0].Data);
+			});
+		}};
 
 	$scope.call = function (phoneNumber) {
 		$scope.$broadcast('CallPhoneNumber', { phoneNumber: phoneNumber });

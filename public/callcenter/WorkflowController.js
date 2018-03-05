@@ -245,10 +245,8 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 					return;
 				}
 			});
-			debugger;
+			//debugger;
 			$('#hangupandDTMFcontainer').show();
-			var phoneCall = new CustomEvent('phoneCall');
-			window.dispatchEvent(phoneCall);
 
 		}
 

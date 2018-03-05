@@ -218,8 +218,6 @@ $scope.$apply();
             });
 
         phoneController.call(phoneNumber);
-        $('#PhoneNumber').html(phoneNumber);
-        $('#hangupandDTMFcontainer').show();
     }
     /*
     function setHeightOfSoftphone()

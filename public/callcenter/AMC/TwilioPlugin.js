@@ -40,7 +40,6 @@ $(document).ready(function () {
 
     window.addEventListener('phoneCall', function(){
 
-        debugger;
         $('#DTMFButton').click(function () {
             debugger;
             var data = {};
@@ -63,10 +62,6 @@ $(document).ready(function () {
 
         //Creater worker/agent object for event subscribtions
         var AMCWorkerJS = newWorker.detail;
-        //var TwilioInstance = newWorker.Twilio;
-        debugger;
-        phoneControllerTwo = phoneControllerScope;
-        phoneControllerThree = phoneControllerScope;
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
             var interactionState = ContactCanvas.Commons.interactionStates.Alerting;

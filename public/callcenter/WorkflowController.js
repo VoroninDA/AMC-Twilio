@@ -51,7 +51,6 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 				if (response.status === 403) {
 					var docUrl = '/callcenter/index.html?';
 					docUrl = docUrl + window.location.href.split('?')[1];
-					//debugger;
 					window.location.replace(docUrl);
 				} else {
 					$log.error(JSON.stringify(response));
@@ -67,7 +66,6 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 
 		/* create TaskRouter Worker */
 		$scope.workerJS = new Twilio.TaskRouter.Worker(token, true, $scope.configuration.twilio.workerIdleActivitySid, $scope.configuration.twilio.workerOfflineActivitySid);
-		debugger;
 		//AMC CODE
 		console.log($scope.workerJS);
 		var newWorkerEvent = new CustomEvent('newWorker', { detail: $scope.workerJS });

@@ -94,7 +94,6 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 	};
 
 	$scope.call = function (phoneNumber) {
-		debugger;
 		$scope.$broadcast('CallPhoneNumber', { phoneNumber: phoneNumber});
 	};
 

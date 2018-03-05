@@ -95,6 +95,7 @@ $(document).ready(function () {
             if (reservation.task.attributes.channel == "phone") {
                 var phoneNumber = reservation.task.attributes.caller;
                 details.setPhone("", "", phoneNumber);
+                $('#PhoneNumber').html(phoneNumber);
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Telephony;
             }
             //THIS IS CHAT
@@ -198,6 +199,7 @@ $scope.$apply();
         var interactionDirection = '';
         var phoneNumber = event.number;
         details.setPhone("", "", phoneNumber);
+        $('#PhoneNumber').html(phoneNumber);
         $('#hangupandDTMFcontainer').show();
         myInteractionID = ContactCanvas.Commons.getSequenceID();
         myScenarioId = ContactCanvas.Commons.getSequenceID();

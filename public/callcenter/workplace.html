@@ -219,13 +219,14 @@
       <!--<button class="button-call" ng-if="isActive == false" ng-click="call(phoneNumber)">CALL</button>-->
       <div class="container">
         <div class="row">
-            <div class="col-sm">
-          <button class="button-call" id="DTMFButton" ng-if="isActive == true" ng-click="dtmf()">DTMF</button>
-          <button class="button-hangup" id="HangUpButton" ng-if="isActive == true" ng-click="hangup()">HANGUP</button>
-            </div>
+          <div class="col-sm">
+            <button class="button-number" id="PhoneNumber" ng-if="isActive == true"></button>
+            <button class="button-call" id="DTMFButton" ng-if="isActive == true" ng-click="dtmf()">DTMF</button>
+            <button class="button-hangup" id="HangUpButton" ng-if="isActive == true" ng-click="hangup()">HANGUP</button>
+          </div>
         </div>
       </div>
-      <span class="status">Status: {{status}}</span>
+      <!-- <span class="status">Status: {{status}}</span> -->
       <span ng-if="error != null" class="status">Error: {{error}}</span>
     </section>
   </div>

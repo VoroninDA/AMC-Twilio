@@ -42,7 +42,9 @@ $(document).ready(function () {
 
     window.addEventListener('phoneCall', function () {
 
-        debugger;
+        $('#DTMFButton').unbind( "click" );
+        $('#HangUpButton').unbind( "click" );
+
         $('#DTMFButton').click(function () {
             //debugger;
             if (dtmfAlreadyClicked) {
@@ -61,6 +63,7 @@ $(document).ready(function () {
             }
         });
         $('#HangUpButton').click(function () {
+            debugger;
             phoneController.hangup();
             if (outBoundCall) {
                 outBoundCall = false;

@@ -56,6 +56,7 @@ $(document).ready(function () {
     });
 
     window.addEventListener('completedTask', function () {
+        $('#hangupandDTMFcontainer').hide();
         AMCdisconnect();
     });
 

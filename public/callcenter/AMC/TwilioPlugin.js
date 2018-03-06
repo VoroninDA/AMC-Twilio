@@ -20,12 +20,12 @@ $(document).ready(function () {
         }, null);
     });
     ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function () { workflowController.logout(); });
-    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function (msg) { alert("hello"); });
+    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function (msg) {  });
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
+    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 0 }, null);
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
-        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 0 }, null);
     });
 
 

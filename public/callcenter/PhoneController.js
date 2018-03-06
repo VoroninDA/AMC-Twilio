@@ -30,7 +30,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 		});
 
 		Twilio.Device.connect(function (conn) {
-			debugger;
+			//debugger;
 			$scope.connection = conn;
 			$scope.status = 'successfully established call';
 			$scope.isActive = true;

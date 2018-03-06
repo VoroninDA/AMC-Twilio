@@ -20,7 +20,9 @@ $(document).ready(function () {
         }, null);
     });
     ContactCanvas.Channel.registerForLogoutEvents(ContactCanvas.Commons.getSequenceID(), function () { workflowController.logout(); });
-    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function (msg) {  });
+    ContactCanvas.Channel.registerContextualControls(ContactCanvas.Commons.getSequenceID(), function (msg) {
+        debugger;
+      });
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
     //ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 0 }, null);
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
@@ -45,9 +47,7 @@ $(document).ready(function () {
         $('#DTMFButton').unbind("click");
         $('#HangUpButton').unbind("click");
 
-        //debugger;
         $('#DTMFButton').click(function () {
-            //debugger;
             if (dtmfAlreadyClicked) {
                 var data = {};
                 data.operationType = ContactCanvas.Commons.ContextualOperationType.Cancel;
@@ -64,7 +64,6 @@ $(document).ready(function () {
             }
         });
         $('#HangUpButton').click(function () {
-            //debugger;
             phoneController.hangup();
             if (outBoundCall) {
                 outBoundCall = false;

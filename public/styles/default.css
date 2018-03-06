@@ -226,20 +226,22 @@
 {
 	width: 100%;
 	border-radius: 3px;
-	border:1px solid green;
+	background-image: url(/callcenter/AMC/img/voice_dtmf_normal.png)
+	/* border:1px solid green;
 	font-size: 1.6em;
 	background-color: green;
-	color:white;
+	color:white; */
 }
 
 .phone-controller .button-hangup 
 {
 	width: 100%;
 	border-radius: 3px;
-	border:1px solid red;
+	background-image: url(/callcenter/AMC/img/voice_end_normal.png)
+	/*border:1px solid red;
 	font-size: 1.6em;
 	background-color: red;
-	color:white;
+	color:white;*/
 }
 
 .phone-controller .status 

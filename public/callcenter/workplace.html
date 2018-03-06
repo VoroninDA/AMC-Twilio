@@ -221,8 +221,14 @@
         <div class="row">
           <div class="col-sm">
             <button class="button-number" id="PhoneNumber" ng-if="isActive == true"></button>
-            <button class="button-call" id="DTMFButton" ng-if="isActive == true" ng-click="dtmf()">Keypad</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
             <button class="button-hangup" id="HangUpButton" ng-if="isActive == true" ng-click="hangup()">Hang Up</button>
+          </div>
+          <div class="col-xs-6">
+            <button class="button-call" id="DTMFButton" ng-if="isActive == true" ng-click="dtmf()">Keypad</button>
           </div>
         </div>
       </div>
@@ -230,7 +236,6 @@
       <span ng-if="error != null" class="status">Error: {{error}}</span>
     </section>
   </div>
-
 </body>
 
 </html>

@@ -106,9 +106,9 @@ $(document).ready(function () {
                 var emailAddress = reservation.task.attributes.name;
                 details.setEmail("Email", "", emailAddress);
                 if(reservation.task.attributes.channel == "chat")
-                    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 735 }, null);
+                    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 800 }, null);
                 else
-                    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 500 }, null);
+                    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 450 }, null);
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Chat;
             }
             //Not Handled Interaction

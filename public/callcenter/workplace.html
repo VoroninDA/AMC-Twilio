@@ -47,7 +47,7 @@
 
   <div class="container" id="mainContainer" style="width:100%; margin-top:10px; display:none">
 
-    <section class="workflow-controller" ng-cloak>
+    <section class="workflow-controller" ng-cloak id="mainContainerWorkFlow">
 
       <div class="panel panel-default">
 
@@ -221,8 +221,8 @@
         <div class="row">
           <div class="col-sm">
             <button class="button-number" id="PhoneNumber" ng-if="isActive == true"></button>
-            <button class="button-call" id="DTMFButton" ng-if="isActive == true" ng-click="dtmf()">DTMF</button>
-            <button class="button-hangup" id="HangUpButton" ng-if="isActive == true" ng-click="hangup()">HANGUP</button>
+            <button class="button-call" id="DTMFButton" ng-if="isActive == true" ng-click="dtmf()">Keypad</button>
+            <button class="button-hangup" id="HangUpButton" ng-if="isActive == true" ng-click="hangup()">Hang Up</button>
           </div>
         </div>
       </div>

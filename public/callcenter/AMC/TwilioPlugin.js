@@ -25,7 +25,7 @@ $(document).ready(function () {
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
-        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 500 }, null);
+        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 0 }, null);
     });
 
 
@@ -85,6 +85,7 @@ $(document).ready(function () {
         var AMCWorkerJS = newWorker.detail;
 
         AMCWorkerJS.on('reservation.created', function (reservation) {
+            
             var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
             var details = new ContactCanvas.Commons.RecordItem("", "", "");
             //var interactionType = '';
@@ -96,6 +97,7 @@ $(document).ready(function () {
             if (reservation.task.attributes.channel == "phone") {
                 var phoneNumber = reservation.task.attributes.caller;
                 details.setPhone("", "", phoneNumber);
+                ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 300 }, null);
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Telephony;
             }
             //THIS IS CHAT
@@ -103,6 +105,10 @@ $(document).ready(function () {
                 details = new ContactCanvas.Commons.RecordItem("", "Contact", "");
                 var emailAddress = reservation.task.attributes.name;
                 details.setEmail("Email", "", emailAddress);
+                if(reservation.task.attributes.channel == "chat")
+                    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 735 }, null);
+                else
+                    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 500 }, null);
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Chat;
             }
             //Not Handled Interaction
@@ -193,6 +199,7 @@ $scope.$apply();
 
     function clickToDialCallback(event) {
         outBoundCall = true;
+        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 300 }, null);
         $('#mainContainerWorkFlow').hide();
         $('#mainContainer').show();
         var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
@@ -268,6 +275,7 @@ function AMCdisconnect() {
     //console.log("called setDisconnectedInboundState");
     $('#mainContainer').hide();
     $('#mainContainerWorkFlow').hide();
+    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 0 }, null);
     var details = new ContactCanvas.Commons.RecordItem("", "", "");
     var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
     var state = ContactCanvas.Commons.interactionStates.Disconnected;

@@ -96,6 +96,7 @@ $(document).ready(function () {
             //YES, Phone
             if (reservation.task.attributes.channel == "phone") {
                 var phoneNumber = reservation.task.attributes.caller;
+                phoneNumber = phoneNumber.replace("+1","");
                 details.setPhone("", "", phoneNumber);
                 ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 500 }, null);
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Telephony;

@@ -205,7 +205,11 @@ $scope.$apply();
         var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
         var details = new ContactCanvas.Commons.RecordItem("", "", "");
         var interactionDirection = '';
-        var phoneNumber = event.number;
+        var phoneNumber;
+        if(event.number)
+            phoneNumber = event.number;
+        else
+            phoneNumber = event.response.data.number;
         details.setPhone("", "", phoneNumber);
         myInteractionID = ContactCanvas.Commons.getSequenceID();
         myScenarioId = ContactCanvas.Commons.getSequenceID();

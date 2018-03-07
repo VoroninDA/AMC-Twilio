@@ -245,7 +245,6 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 					return;
 				}
 			});
-			//debugger;
 			$('#hangupandDTMFcontainer').show();
 
 		}

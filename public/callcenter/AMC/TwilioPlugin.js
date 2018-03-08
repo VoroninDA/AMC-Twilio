@@ -25,6 +25,7 @@ $(document).ready(function () {
       });
     ContactCanvas.Channel.addPluginImage(ContactCanvas.Commons.getSequenceID(), iconPath, null);
     //ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 0 }, null);
+    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 420 }, null);
     ContactCanvas.Channel.initializationComplete(ContactCanvas.Commons.getSequenceID(), {}, function (data) {
         Config = data.response.data.config;
         ContactCanvas.Channel.addContextualAccessList(ContactCanvas.Commons.getSequenceID(), { contactsList: [] });
@@ -200,7 +201,7 @@ $scope.$apply();
     function clickToDialCallback(event) {
         outBoundCall = true;
         //ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 300 }, null);
-        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 420 }, null);
+        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 425 }, null);
         $('#mainContainerWorkFlow').hide();
         $('#mainContainer').show();
         var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
@@ -280,7 +281,8 @@ function AMCdisconnect() {
     //console.log("called setDisconnectedInboundState");
     $('#mainContainer').hide();
     $('#mainContainerWorkFlow').hide();
-    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 300 }, null);
+    //ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 300 }, null);
+    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 420 }, null);
     var details = new ContactCanvas.Commons.RecordItem("", "", "");
     var direction = ContactCanvas.Commons.InteractionDirectionTypes.Inbound; //changed to inbound as Screenpop not happening for outbound.Ben to check Code.
     var state = ContactCanvas.Commons.interactionStates.Disconnected;

@@ -97,7 +97,7 @@ $(document).ready(function () {
                 var phoneNumber = reservation.task.attributes.caller;
                 phoneNumber = phoneNumber.replace("+1","");
                 details.setPhone("", "", phoneNumber);
-                ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 500 }, null);
+                ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 425 }, null);
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Telephony;
             }
             //THIS IS CHAT
@@ -105,10 +105,10 @@ $(document).ready(function () {
                 details = new ContactCanvas.Commons.RecordItem("", "Contact", "");
                 var emailAddress = reservation.task.attributes.name;
                 details.setEmail("Email", "", emailAddress);
-                if(reservation.task.attributes.channel == "chat")
-                    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 800 }, null);
-                else
-                    ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 450 }, null);
+                //if(reservation.task.attributes.channel == "chat")
+                    //ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 800 }, null);
+                //else
+                    //ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 450 }, null);
                 //interactionType = ContactCanvasChannelAPI.ChannelTypes.Chat;
             }
             //Not Handled Interaction
@@ -199,7 +199,8 @@ $scope.$apply();
 
     function clickToDialCallback(event) {
         outBoundCall = true;
-        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 300 }, null);
+        //ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 300 }, null);
+        ContactCanvas.Channel.setSoftphoneHeight(ContactCanvas.Commons.getSequenceID(), { height: 420 }, null);
         $('#mainContainerWorkFlow').hide();
         $('#mainContainer').show();
         var interactionState = ContactCanvas.Commons.interactionStates.Alerting;
